@@ -1,0 +1,164 @@
+.content {
+  min-height: 100vh;
+  overflow: hidden;
+  /* border: 1px solid blue; */
+}
+
+.heading_content {
+  height: 140px;
+  border-right: 12px solid;
+}
+
+/* Header */
+.col_right_header {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  /* border: 1px solid red; */
+}
+.col_right_header div {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 15px;
+  margin-left: -370px;
+}
+.col_right_header div img {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+}
+.col_left_header {
+  height: 100vh;
+}
+.col_left_header p {
+  font-size: 4.5em;
+  font-weight: 500;
+  color: #5c3d2e;
+  line-height: 1.1em;
+}
+.d_text_header {
+  width: 60rem;
+  height: auto;
+}
+/*End Header */
+
+/* Populer for you */
+.card_article1 {
+  width: 683px;
+  height: 801px;
+  margin-left: 20em;
+}
+.card_article1 img {
+  width: 830px;
+  height: 830px;
+  margin-left: -13em;
+  margin-top: -70px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+.col_right_article1 {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.col_right_article1 h1 {
+  font-size: 56px;
+  color: #5c3d2e;
+}
+.col_right_article1 p {
+  font-size: 24px;
+  line-height: 28px;
+}
+.col_right_article1 button {
+  margin-right: 20em;
+}
+/* End populer for you */
+
+/* New recipe */
+.card_left_article2 {
+  position: fixed;
+  width: 480px;
+  height: 820px;
+}
+.card_left_article2 img {
+  width: 800px;
+  margin-left: 10em;
+  margin-bottom: -5em;
+  border-radius: 15px;
+  object-fit: cover;
+  /* opacity: 0.7; */
+}
+.col_right_article2 {
+  height: 65vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 30em;
+}
+.col_right_article2 h1 {
+  font-size: 56px;
+  color: #5c3d2e;
+}
+.col_right_article2 p {
+  font-size: 24px;
+  line-height: 28px;
+}
+.col_right_article2 button {
+  margin-right: 20em;
+}
+/* End new recipe */
+
+/* Populer recipe */
+.row_heading_article3 {
+  margin-top: 15em;
+}
+.container_card {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.card_article3 {
+  width: 20rem;
+  height: 15rem;
+}
+.card_article3 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+.card_article3 p {
+  position: absolute;
+}
+/* End pupuler recipe */
+
+/* Footer */
+.d_footer {
+  height: 685px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10em;
+}
+.d_footer h1 {
+  font-size: 72px;
+  color: #5c3d2e;
+}
+.d_footer p {
+  font-size: 24px;
+  margin-top: 50px;
+}
+.list_footer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 10em;
+}
+/* End footer */

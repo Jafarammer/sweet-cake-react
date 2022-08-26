@@ -1,0 +1,14 @@
+.show_image {
+  width: 100%;
+  height: 100%;
+  object-fit: inherit;
+}
+.col {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.text_forgot {
+  font-size: small;
+}
