@@ -3,6 +3,8 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import { ProfileContext } from "./context";
+// css global
+// import "./App.css";
 // Pages
 import Home from "./pages/Home";
 import ShowLayout from "./pages/ShowLayout";
@@ -10,6 +12,10 @@ import Profile from "./pages/Profile";
 import HideLayout from "./pages/HideLayout";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import Logout from "./pages/auth/Logout";
+import AddRecipe from "./pages/AddRecipe";
+import DetailRecipe from "./pages/DetailRecipe";
+// import DeatilPost from "./pages/DeatilPost";
 
 function App() {
   // const ProfileContext = React.createContext({});
@@ -29,6 +35,10 @@ function App() {
             <Route path="/" element={<App />} />
             <Route index element={<Home />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="logout" element={<Logout />} />
+            <Route path="/addRecipe" element={<AddRecipe />} />
+            <Route path="/detail/:id" element={<DetailRecipe />} />
+            {/* <Route path="/detail-post/:id" element={<DeatilPost />} /> */}
           </Route>
           <Route element={<HideLayout />}>
             <Route path="login" element={<Login />} />

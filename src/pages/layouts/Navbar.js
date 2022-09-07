@@ -32,7 +32,7 @@ function Navbar() {
 
             <NavList
               className="nav-item mx-2 nav-link fw-bold"
-              href="/add"
+              href="/addRecipe"
               labelLink="Add Recipe"
             />
             <NavList
@@ -69,9 +69,11 @@ function Navbar() {
                 </Link>
               </li>
               <li>
-                <button className="dropdown-item" type="button">
-                  Logout
-                </button>
+                <Link to="/logout" className="text-decoration-none">
+                  <button className="dropdown-item text-center" type="button">
+                    Logout
+                  </button>
+                </Link>
               </li>
             </ul>
           </div>

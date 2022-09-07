@@ -1,3 +1,4 @@
+/* @media (min-width: 1224px) { */
 .content {
   min-height: 100vh;
   overflow: hidden;
@@ -6,7 +7,8 @@
 
 .heading_content {
   height: 140px;
-  border-right: 12px solid;
+  border-right: 12px solid yellow;
+  /* border: 1px solid red; */
 }
 
 /* Header */
@@ -87,6 +89,7 @@
 }
 .card_left_article2 img {
   width: 800px;
+  height: 600px;
   margin-left: 10em;
   margin-bottom: -5em;
   border-radius: 15px;
@@ -119,14 +122,16 @@
   margin-top: 15em;
 }
 .container_card {
-  height: 60vh;
+  height: 75vh;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  /* border: 1px solid red; */
 }
 .card_article3 {
   width: 20rem;
-  height: 15rem;
+  cursor: pointer;
+  /* height: 5rem; */
 }
 .card_article3 img {
   width: 100%;
@@ -162,3 +167,46 @@
   margin-top: 10em;
 }
 /* End footer */
+/* } */
+
+/* tablet */
+@media (max-width: 1224px) {
+  .col_right_header {
+    height: 50vh;
+  }
+  .col_right_header div {
+    width: 300px;
+    height: 300px;
+    margin-left: -150px;
+    /* margin-top: 40px; */
+  }
+  .col_left_header {
+    height: 50vh;
+  }
+  .col_left_header p {
+    font-size: 2.5rem;
+  }
+  .d_text_header {
+    width: 27rem;
+    margin-left: -30px;
+  }
+}
+/* phone */
+@media (max-width: 765px) {
+  .col_right_header {
+    display: none;
+  }
+  .col_left_header {
+    padding: 0;
+    /* display: block; */
+    border: 1px solid red;
+  }
+  .d_text_header {
+    width: 100vw;
+    margin: 0;
+  }
+  .d_text_header input {
+    padding: 0 !important;
+    font-size: 2px;
+  }
+}

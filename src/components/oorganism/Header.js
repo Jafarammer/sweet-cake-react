@@ -10,7 +10,7 @@ function Header() {
       <div className={styles.content}>
         <div className="row">
           <div
-            className={`col-9 px-5 d-flex align-items-center ${styles.col_left_header}`}
+            className={` col-sm-12 col-md-9 col-lg-9 px-5 d-flex align-items-center ${styles.col_left_header}`}
           >
             <div className={`card px-5 border-0 ${styles.d_text_header}`}>
               <p className="ms-3">Discover Recipe</p>
@@ -35,7 +35,9 @@ function Header() {
               </div>
             </div>
           </div>
-          <div className={`col-3 bg-warning ${styles.col_right_header}`}>
+          <div
+            className={`col-sm-0 col-md-3 col-lg-3 bg-warning ${styles.col_right_header}`}
+          >
             <div className="card">
               <img src={homeImg} className="card-img-top" alt="image" />
             </div>

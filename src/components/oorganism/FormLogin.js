@@ -16,9 +16,10 @@ function FormLogin() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = () => {
+    document.getElementById("reset-form").reset();
     setIsLoading(true);
     axios
-      .post("http://localhost:8000/login", {
+      .post("https://sweet-cake-chef.herokuapp.com/login", {
         email: email,
         password: password,
       })
@@ -31,7 +32,8 @@ function FormLogin() {
           text: localStorage.getItem("message"),
         });
         setTimeout(() => {
-          navigate("/");
+          //   navigate("/");
+          window.location.href = "/";
         }, 1000);
       })
       .catch((err) => {
@@ -47,7 +49,11 @@ function FormLogin() {
 
   return (
     <>
-      <form className="px-5" onSubmit={(e) => e.preventDefault()}>
+      <form
+        className="px-5"
+        id="reset-form"
+        onSubmit={(e) => e.preventDefault()}
+      >
         {/* Email */}
         <div className="mb-3 px-5 mx-5">
           <label className="form-label mb-3" for="inputEmail">
@@ -58,6 +64,8 @@ function FormLogin() {
             className="form-control py-3 ps-4"
             id="inputEmail"
             placeholder="examplexxx@gmail.com"
+            autoComplete="off"
+            autoSave="none"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -78,7 +86,7 @@ function FormLogin() {
         <div className="d-grid gap-2 px-5">
           <button
             className="btn btn-warning text-white fw-bold mx-5 py-3"
-            type="submit"
+            type="reset"
             disabled={isLoading}
             onClick={handleLogin}
           >

@@ -19,6 +19,7 @@ function Login() {
         text: "You have login!!!",
       });
       navigate("/");
+      //   window.location.href = "/";
     }
   });
   return (

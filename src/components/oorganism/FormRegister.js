@@ -9,7 +9,7 @@ function FormRegister() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhone] = useState("");
+  const [phone_number, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -17,10 +17,10 @@ function FormRegister() {
   const handleRegister = () => {
     setIsLoading(true);
     axios
-      .post("http://localhost:8000/users/add", {
+      .post("https://sweet-cake-chef.herokuapp.com/register", {
         name: name,
         email: email,
-        phoneNumber: phoneNumber,
+        phone_number: phone_number,
         password: password,
         confirmPassword: confirmPassword,
       })
@@ -46,7 +46,11 @@ function FormRegister() {
 
   return (
     <>
-      <form className="px-5" onSubmit={(e) => e.preventDefault()}>
+      <form
+        autoComplete="off"
+        className="px-5"
+        onSubmit={(e) => e.preventDefault()}
+      >
         {/* Name */}
         <div className="mb-3 px-5 mx-5">
           <label className="form-label mb-3" for="inputName">
@@ -116,7 +120,7 @@ function FormRegister() {
         <div className="d-grid gap-2 px-5">
           <button
             className="btn btn-warning text-white fw-bold mx-5 py-3"
-            type="submit"
+            type="reset"
             disabled={isLoading}
             onClick={handleRegister}
           >
