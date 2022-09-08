@@ -154,11 +154,11 @@ Contributions are what make the open source community such an amazing place to b
 
 :rocket: [`Backend Sweet Cake`](https://github.com/Jafarammer/sweetCakeChef)
 
-:rocket: [`Frontend Recipenation`](https://github.com/Jafarammer/sweet-cake-react)
+:rocket: [`Frontend Sweet Cake`](https://github.com/Jafarammer/sweet-cake-react)
 
 :rocket: [`API`](https://sweet-cake-chef.herokuapp.com/)
 
-:rocket: [`Demo Recipenation`](https://sweet-cake-react.web.app/)
+:rocket: [`Demo Sweet Cake`](https://sweet-cake-react.web.app/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -169,7 +169,7 @@ Contributions are what make the open source community such an amazing place to b
     <tr>
       <td align="center">
         <a href="https://github.com/Jafarammer">
-          <img width="100" src="https://avatars.githubusercontent.com/u/43610978?s=400&u=76c4f9fc270cb7cb6e82570927b32973161aa970&v=4" alt="Fandi"><br/>
+          <img width="100" src="https://avatars.githubusercontent.com/u/73752464?v=4" alt="Fandi"><br/>
           <sub><b>Wan Jafar</b></sub> <br/>
           <sub>FullStack Web Developer</sub>
         </a>
