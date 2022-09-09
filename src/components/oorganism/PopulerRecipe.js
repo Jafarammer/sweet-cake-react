@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 //molecules
 import HeadSection from "../molecules/HeadSection";
-import ShowProductPicture from "../molecules/ShowProductPicture";
 // css
 import styles from "../../css/Home.module.css";
 // image
@@ -17,9 +16,6 @@ function PopulerRecipe() {
       .get("https://sweet-cake-chef.herokuapp.com/recipe")
       .then((res) => setListImg(res.data.data));
   });
-  // const handleDetail = () => {
-  //   navigate(`/detail/${listImg[0]?.id}`);
-  // };
   return (
     <>
       <div className={`mb-5 ${styles.content}`}>
@@ -27,16 +23,20 @@ function PopulerRecipe() {
           className={`row mt-5 ${styles.row_heading_article3}`}
           label="Populer Recipe"
         />
-        <div className={`container py-3 ${styles.container_card}`}>
-          {listImg
-            .map((item) => (
-              <ShowProductPicture
-                src={item?.photo || populerImg}
-                title={item?.title_recipe}
+        <div className="container ps-5">
+          <div className="row ms-5">
+            {listImg.map((item) => (
+              <div
+                className={`card ms-3 mb-3 bg-dark border-0 px-1 pb-1 ${styles.card_article3}`}
                 onClick={() => navigate(`/detail/${item?.id}`)}
-              />
-            ))
-            .slice(0, 6)}
+              >
+                <img src={item?.photo || populerImg} className="card-img-top" />
+                <p className="position-absolute fixed-bottom ms-4 text-light">
+                  {item?.title_recipe}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

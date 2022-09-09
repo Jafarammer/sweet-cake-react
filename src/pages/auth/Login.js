@@ -19,14 +19,13 @@ function Login() {
         text: "You have login!!!",
       });
       navigate("/");
-      //   window.location.href = "/";
     }
   });
   return (
     <>
       <div className="overflow-hidden p-0 m-0">
         <div className="row">
-          <div className={`col-6 px-5 border ${styles.col}`}>
+          <div className={`col-sm-12 col-lg-6 px-5 border ${styles.col_left}`}>
             <NavLink to="/" className="text-decoration-none">
               <p className="text-warning fw-bold fs-5 ms-2">Back</p>
             </NavLink>
@@ -38,7 +37,7 @@ function Login() {
               <FormLogin />
             </div>
           </div>
-          <div className={`col-6 px-0 ${styles.col}`}>
+          <div className={`col-sm-0 col-lg-6 px-0 ${styles.col_right}`}>
             <img src={loginImg} className={styles.show_image} />
           </div>
         </div>

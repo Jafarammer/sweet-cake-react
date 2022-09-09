@@ -26,7 +26,6 @@ function Tabs() {
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
-      // window.location.href = "/login";
     } else {
       axios
         .get(
@@ -35,12 +34,6 @@ function Tabs() {
         .then((res) => setDataRecipe(res.data.recipe));
     }
   }, []);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:8000/recipe/recipebyuser/${userData.id}`)
-  //     .then((res) => setDataRecipe(res.data.recipe));
-  // }, []);
   return (
     <>
       <div>
@@ -110,27 +103,6 @@ function Tabs() {
                   </div>
                 </SwiperSlide>
               ))}
-              {/* <SwiperSlide>
-                <div className={`card ${styles.card_myRecipe}`}>2</div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={`card ${styles.card_myRecipe}`}>3</div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={`card ${styles.card_myRecipe}`}>4</div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={`card ${styles.card_myRecipe}`}>5</div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={`card ${styles.card_myRecipe}`}>6</div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={`card ${styles.card_myRecipe}`}>7</div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={`card ${styles.card_myRecipe}`}>8</div>
-              </SwiperSlide> */}
             </Swiper>
           </div>
         </div>

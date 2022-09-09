@@ -7,7 +7,7 @@
 
 .heading_content {
   height: 140px;
-  border-right: 12px solid yellow;
+  border-right: 12px solid rgb(255, 196, 0);
   /* border: 1px solid red; */
 }
 
@@ -121,26 +121,18 @@
 .row_heading_article3 {
   margin-top: 15em;
 }
-.container_card {
-  height: 75vh;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  /* border: 1px solid red; */
-}
 .card_article3 {
-  width: 20rem;
+  width: 22rem !important;
+  height: 16rem !important;
+  padding-top: 4px;
+  overflow: hidden;
   cursor: pointer;
-  /* height: 5rem; */
 }
 .card_article3 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.7;
-}
-.card_article3 p {
-  position: absolute;
+  opacity: 0.8;
 }
 /* End pupuler recipe */
 

@@ -3,12 +3,24 @@
   height: 100%;
   object-fit: inherit;
 }
-.col {
+.col_left {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+.col_right {
+  height: 100vh;
+  display: flex;
+  /* flex-direction: column; */
+  /* justify-content: center; */
+}
 .text_forgot {
   font-size: small;
+}
+
+@media (max-width: 1224px) {
+  .col_right {
+    display: none;
+  }
 }

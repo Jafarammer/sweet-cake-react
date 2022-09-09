@@ -14,7 +14,7 @@ function DetailRecipe() {
   useEffect(() => {
     axios
       .get(`https://sweet-cake-chef.herokuapp.com/recipe/id/${params.id}`)
-      .then((res) => setDataRecipe(res.data));
+      .then((res) => setDataRecipe(res.data.data));
   }, []);
   return (
     <div className={styles.content}>

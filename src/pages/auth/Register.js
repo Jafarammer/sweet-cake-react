@@ -25,8 +25,8 @@ function Register() {
     <>
       <div className="overflow-hidden p-0 m-0">
         <div className="row">
-          <div className={`col-6 px-5 ${styles.col}`}>
-            <NavLink to="/" className="text-decoration-none">
+          <div className={`col-sm-12 col-lg-6 px-5 ${styles.col_left}`}>
+            <NavLink to="/" className="text-decoration-none mt-3">
               <p className="text-warning fw-bold fs-5 ms-2">Back</p>
             </NavLink>
             <TextHeader
@@ -37,7 +37,7 @@ function Register() {
               <FormRegister />
             </div>
           </div>
-          <div className={`col-6 px-0 ${styles.col}`}>
+          <div className={`col-sm-0 col-lg-6 px-0 ${styles.col_right}`}>
             <img src={registerImg} className={styles.show_image} />
           </div>
         </div>

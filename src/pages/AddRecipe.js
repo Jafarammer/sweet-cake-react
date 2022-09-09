@@ -13,7 +13,6 @@ function AddRecipe() {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [file, setFile] = useState("");
-  const [userId, setUserId] = useState(userData.id);
   const [preview, setPreview] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,9 +20,8 @@ function AddRecipe() {
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
-      // window.location.href = "/login";
     }
-  });
+  }, []);
 
   const loadImage = (e) => {
     const image = e.target.files[0];
@@ -36,8 +34,8 @@ function AddRecipe() {
     const formData = new FormData();
     formData.append("title_recipe", title);
     formData.append("ingredients", ingredients);
-    formData.append("image", file);
-    formData.append("user_id", userId);
+    formData.append("photo", file);
+    formData.append("user_id", userData.id);
     await axios
       .post(
         "https://sweet-cake-chef.herokuapp.com/recipe/add",
@@ -96,13 +94,6 @@ function AddRecipe() {
                   placeholder="Title Recipe"
                   aria-label="default input example"
                   onChange={loadImage}
-                />
-                <input
-                  className="form-control form-control-lg mb-4 d-none"
-                  type="text"
-                  aria-label="default input example"
-                  value={userId}
-                  onChange={(e) => setUserId(e.target.value)}
                 />
                 <div className="text-center">
                   <button

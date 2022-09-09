@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useRoutes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // molecules
 import HeadSection from "../molecules/HeadSection";
 // css
@@ -9,17 +9,12 @@ import styles from "../../css/Home.module.css";
 import newImg from "../../images/default.svg";
 
 function NewRecipe() {
-  const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [idRecipe, setIdRecipe] = useState({ id: "" });
   useEffect(() => {
     axios
       .get("https://sweet-cake-chef.herokuapp.com/recipe")
       .then((res) => setData(res.data.data));
   });
-  // const handleDetail = (id) => {
-  //   navigate(`/detail/${data[0]?.id}`);
-  // };
   return (
     <>
       <div className={`pt-5 mb-5 ${styles.content}`}>
@@ -57,11 +52,7 @@ function NewRecipe() {
             <Link to={`/detail/${data[0]?.id}`}>
               <button
                 type="button"
-                // value={idRecipe.id}
                 className="btn btn-warning text-white py-3 px-5 fw-bold mt-4 border"
-                // onClick={handleDetail}
-                // onChange={(e) => setIdRecipe({ id: e.target.value })}
-                // href={`/detail/${data[0]?.id}`}
               >
                 Learn More
               </button>

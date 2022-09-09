@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate, NavLink, useParams } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 // context
@@ -10,10 +10,8 @@ import Tabs from "../components/oorganism/Tabs";
 import styles from "../css/Profile.module.css";
 // image
 import avatarImg from "../images/avatar.jpg";
-import defaultImg from "../images/comingSoon.svg";
 
 function Profile() {
-  // const id = useParams();
   const userData = useContext(ProfileContext);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -30,12 +28,12 @@ function Profile() {
         .get(`https://sweet-cake-chef.herokuapp.com/users/id/${userData.id}`)
         .then((res) => setData(res.data.data));
     }
-  });
+  }, []);
 
   const userUpdate = () => {
     setIsLoading(true);
     const formData = new FormData();
-    formData.append("image", photo);
+    formData.append("photo", photo);
 
     const config = {
       headers: {
@@ -51,10 +49,7 @@ function Profile() {
           icon: "success",
           text: `Update photo profile successfully`,
         });
-        setTimeout(() => {
-          // window.location.href = "/profile";
-          navigate("/profile");
-        }, 7000);
+        navigate("/profile");
       })
       .catch((err) => {
         Swal.fire({

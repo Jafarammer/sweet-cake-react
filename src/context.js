@@ -1,7 +1,7 @@
 import React from "react";
 
 export const ProfileContext = React.createContext({
-  id: 1,
+  id: null,
   name: "jafar",
   email: "example@mail.com",
   phone_number: "123456",

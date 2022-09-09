@@ -48,7 +48,7 @@ function FormRegister() {
     <>
       <form
         autoComplete="off"
-        className="px-5"
+        className="px-5 border"
         onSubmit={(e) => e.preventDefault()}
       >
         {/* Name */}

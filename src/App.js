@@ -15,7 +15,6 @@ import Register from "./pages/auth/Register";
 import Logout from "./pages/auth/Logout";
 import AddRecipe from "./pages/AddRecipe";
 import DetailRecipe from "./pages/DetailRecipe";
-// import DeatilPost from "./pages/DeatilPost";
 
 function App() {
   // const ProfileContext = React.createContext({});
@@ -38,7 +37,6 @@ function App() {
             <Route path="logout" element={<Logout />} />
             <Route path="/addRecipe" element={<AddRecipe />} />
             <Route path="/detail/:id" element={<DetailRecipe />} />
-            {/* <Route path="/detail-post/:id" element={<DeatilPost />} /> */}
           </Route>
           <Route element={<HideLayout />}>
             <Route path="login" element={<Login />} />

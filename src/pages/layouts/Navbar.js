@@ -1,8 +1,6 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ProfileContext } from "../../context";
-// component
-import NavList from "../../components/molecules/NavList";
 
 function Navbar() {
   const ProfileName = React.useContext(ProfileContext);
@@ -22,24 +20,27 @@ function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-5">
-            {/* Home */}
-            <NavList
-              className="nav-item mx-2 nav-link active fw-bold"
-              href="/"
-              labelLink="Home"
-              aria-current="page"
-            />
-
-            <NavList
-              className="nav-item mx-2 nav-link fw-bold"
-              href="/addRecipe"
-              labelLink="Add Recipe"
-            />
-            <NavList
-              className="nav-item mx-2 nav-link fw-bold"
-              href="/profile"
-              labelLink="Profile"
-            />
+            <li className="nav-item mx-2 nav-link active fw-bold">
+              <Link to="/" className="text-decoration-none text-secondary">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item mx-2 nav-link active fw-bold">
+              <Link
+                to="/addRecipe"
+                className="text-decoration-none text-secondary"
+              >
+                Add recipe
+              </Link>
+            </li>
+            <li className="nav-item mx-2 nav-link active fw-bold">
+              <Link
+                to="/profile"
+                className="text-decoration-none text-secondary"
+              >
+                Profile
+              </Link>
+            </li>
           </ul>
           <div className="btn-group">
             <button
