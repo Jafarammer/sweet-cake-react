@@ -17,7 +17,7 @@ function FormRegister() {
   const handleRegister = () => {
     setIsLoading(true);
     axios
-      .post("https://sweetcakechef-production.up.railway.app/register", {
+      .post("https://sweet-cake-chef.herokuapp.com/register", {
         name: name,
         email: email,
         phone_number: phone_number,

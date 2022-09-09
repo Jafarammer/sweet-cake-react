@@ -19,7 +19,7 @@ function FormLogin() {
     document.getElementById("reset-form").reset();
     setIsLoading(true);
     axios
-      .post("https://sweetcakechef-production.up.railway.app/login", {
+      .post("https://sweet-cake-chef.herokuapp.com/login", {
         email: email,
         password: password,
       })

@@ -13,7 +13,7 @@ function PopulerRecipe() {
   const [listImg, setListImg] = useState([]);
   useEffect(() => {
     axios
-      .get("https://sweetcakechef-production.up.railway.app/recipe")
+      .get("https://sweet-cake-chef.herokuapp.com/recipe")
       .then((res) => setListImg(res.data.data));
   });
   return (

@@ -29,7 +29,7 @@ function Tabs() {
     } else {
       axios
         .get(
-          `https://sweetcakechef-production.up.railway.app/recipe/recipebyuser/${userData.id}`
+          `https://sweet-cake-chef.herokuapp.com/recipe/recipebyuser/${userData.id}`
         )
         .then((res) => setDataRecipe(res.data.recipe));
     }
