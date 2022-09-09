@@ -38,7 +38,7 @@ function AddRecipe() {
     formData.append("user_id", userData.id);
     await axios
       .post(
-        "https://sweet-cake-chef.herokuapp.com/recipe/add",
+        "https://sweetcakechef-production.up.railway.app/recipe/add",
         formData,
         {
           headers: {

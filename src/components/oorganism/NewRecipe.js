@@ -12,7 +12,7 @@ function NewRecipe() {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("https://sweet-cake-chef.herokuapp.com/recipe")
+      .get("https://sweetcakechef-production.up.railway.app/recipe")
       .then((res) => setData(res.data.data));
   });
   return (
