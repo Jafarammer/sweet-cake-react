@@ -38,7 +38,7 @@ function Login() {
             </div>
           </div>
           <div className={`col-sm-0 col-lg-6 px-0 ${styles.col_right}`}>
-            <img src={loginImg} className={styles.show_image} />
+            <img src={loginImg} className={styles.show_image} alt="image" />
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ function Logout() {
       localStorage.clear();
       navigate("/login");
     }, 2000);
-  }, []);
+  });
 
   return (
     <>
