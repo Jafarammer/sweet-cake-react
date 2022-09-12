@@ -22,7 +22,7 @@ function DetailRecipe() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/recipe/id/${params.id}`)
+      .get(`https://sweet-cake-chef.herokuapp.com/recipe/id/${params.id}`)
       .then((res) => setDataRecipe(res.data.data));
   }, []);
 
@@ -39,7 +39,7 @@ function DetailRecipe() {
     } else {
       await axios
         .post(
-          `http://localhost:8000/comment/add`,
+          `https://sweet-cake-chef.herokuapp.com/comment/add`,
           {
             comment_message: comment_message,
             user_id: userData.id,

@@ -40,7 +40,7 @@ function Profile() {
         "content-type": "multipart/form-data",
       },
     };
-    const url = `http://localhost:8000/users/edit/${userData.id}`;
+    const url = `https://sweet-cake-chef.herokuapp.com/users/edit/${userData.id}`;
     console.log(url);
     axios
       .patch(url, formData, config)

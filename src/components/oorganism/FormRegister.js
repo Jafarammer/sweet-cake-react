@@ -17,7 +17,7 @@ function FormRegister() {
   const handleRegister = () => {
     setIsLoading(true);
     axios
-      .post("http://localhost:8000/register", {
+      .post("https://sweet-cake-chef.herokuapp.com/register", {
         name: name,
         email: email,
         phone_number: phone_number,

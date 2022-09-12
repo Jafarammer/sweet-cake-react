@@ -28,7 +28,9 @@ function Tabs() {
       navigate("/login");
     } else {
       axios
-        .get(`http://localhost:8000/recipe/recipebyuser/${userData.id}`)
+        .get(
+          `https://sweet-cake-chef.herokuapp.com/recipe/recipebyuser/${userData.id}`
+        )
         .then((res) => setDataRecipe(res.data.recipe));
     }
   }, []);

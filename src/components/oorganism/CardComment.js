@@ -10,7 +10,9 @@ function CardComment() {
   const [dataComment, setDataComment] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/comment/comment/${paramsResult.id}`)
+      .get(
+        `https://sweet-cake-chef.herokuapp.com/comment/comment/${paramsResult.id}`
+      )
       .then((res) => setDataComment(res.data.data));
   }, []);
   const addDefaultSrc = (e) => {
