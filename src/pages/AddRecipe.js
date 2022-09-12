@@ -38,7 +38,7 @@ function AddRecipe() {
     formData.append("user_id", userData.id);
     await axios
       .post(
-        "https://sweet-cake-chef.herokuapp.com/recipe/add",
+        "http://localhost:8000/recipe/add",
         formData,
         {
           headers: {
@@ -56,10 +56,10 @@ function AddRecipe() {
           navigate("/");
         }, 2000);
       })
-      .catch((err) => {
+      .catch((error) => {
         Swal.fire({
           icon: "error",
-          text: `${err?.response.data}`,
+          text: `${error?.response.data}`,
         });
       })
       .finally(() => {

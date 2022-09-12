@@ -25,7 +25,7 @@ function Profile() {
       // window.location.href = "/login";
     } else {
       axios
-        .get(`https://sweet-cake-chef.herokuapp.com/users/id/${userData.id}`)
+        .get(`http://localhost:8000/users/id/${userData.id}`)
         .then((res) => setData(res.data.data));
     }
   }, []);
@@ -40,7 +40,7 @@ function Profile() {
         "content-type": "multipart/form-data",
       },
     };
-    const url = `https://sweet-cake-chef.herokuapp.com/users/edit/${userData.id}`;
+    const url = `http://localhost:8000/users/edit/${userData.id}`;
     console.log(url);
     axios
       .patch(url, formData, config)
@@ -51,10 +51,11 @@ function Profile() {
         });
         navigate("/profile");
       })
-      .catch((err) => {
+      .catch((error) => {
+        console.log(error);
         Swal.fire({
           icon: "error",
-          text: `${err?.response.data}`,
+          text: `${error?.response.data}`,
         });
       })
       .finally(() => {

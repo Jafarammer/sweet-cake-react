@@ -1,12 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ProfileContext } from "../../context";
+// css
+import styles from "../../css/Navbar.module.css";
 
 function Navbar() {
   const ProfileName = React.useContext(ProfileContext);
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top py-3 px-5">
+      <nav
+        className={`navbar navbar-expand-lg navbar-light bg-light sticky-top py-3 px-5 ${styles.d_nav}`}
+      >
         <button
           className="navbar-toggler"
           type="button"
