@@ -28,7 +28,7 @@ function Profile() {
         .get(`https://sweet-cake-react.web.app/users/id/${userData.id}`)
         .then((res) => setData(res.data.data));
     }
-  }, []);
+  });
 
   const userUpdate = () => {
     setIsLoading(true);

@@ -61,6 +61,7 @@ function DetailRecipe() {
             icon: "error",
             text: `${error?.response.data}`,
           });
+          console.log(error);
         })
         .finally(() => {
           setIsLoading(false);
