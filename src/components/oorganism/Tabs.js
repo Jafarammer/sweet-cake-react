@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper";
@@ -15,7 +14,6 @@ import styles from "../../css/Profile.module.css";
 
 function Tabs() {
   const userData = useContext(ProfileContext);
-  const navigate = useNavigate();
   const [toggleState, setToggleState] = useState(1);
   const [dataRecipe, setDataRecipe] = useState([]);
 
@@ -24,15 +22,11 @@ function Tabs() {
   };
   // cek localstorage
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      navigate("/login");
-    } else {
-      axios
-        .get(
-          `https://sweet-cake-chef.herokuapp.com/recipe/recipebyuser/${userData.id}`
-        )
-        .then((res) => setDataRecipe(res.data.recipe));
-    }
+    axios
+      .get(
+        `https://sweet-cake-chef.herokuapp.com/recipe/recipebyuser/${userData.id}`
+      )
+      .then((res) => setDataRecipe(res.data.recipe));
   }, []);
   return (
     <>

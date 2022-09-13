@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 // context
 import { ProfileContext } from "../context";
@@ -12,46 +12,53 @@ import styles from "../css/Profile.module.css";
 import avatarImg from "../images/avatar.jpg";
 
 function Profile() {
-  const userData = useContext(ProfileContext);
+  const userDataContext = useContext(ProfileContext);
+  const [dataProfile, setDataProfile] = useState("");
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
   const [photo, setPhoto] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  // cek localstorage
   useEffect(() => {
     if (!localStorage.getItem("token")) {
+      // navigate("/login");
       window.location.href = "/login";
+    } else {
+      axios
+        .get(
+          `https://sweet-cake-chef.herokuapp.com/users/id/${userDataContext.id}`
+        )
+        .then((res) => setDataProfile(res.data.data));
     }
-  });
-  useEffect(() => {
-    axios
-      .get(`https://sweet-cake-react.web.app/users/id/${userData.id}`)
-      .then((res) => {
-        console.log(res.data);
-      });
   }, []);
 
-  const userUpdate = () => {
+  const userUpdate = async () => {
     setIsLoading(true);
     const formData = new FormData();
     formData.append("photo", photo);
 
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    };
-    const url = `https://sweet-cake-chef.herokuapp.com/users/edit/${userData.id}`;
-    console.log(url);
-    axios
-      .patch(url, formData, config)
+    // const config = {
+    //   headers: {
+    //     "content-type": "multipart/form-data",
+    //   },
+    // };
+    // const url = `http://localhost:8000/users/edit/${dataProfile[0]?.id}`;
+    await axios
+      .patch(
+        `https://sweet-cake-chef.herokuapp.com/users/edit/${dataProfile[0]?.id}`,
+        formData,
+        {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         Swal.fire({
           icon: "success",
           text: `Update photo profile successfully`,
         });
-        navigate("/profile");
+        setTimeout(() => {
+          navigate(0);
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
@@ -72,6 +79,7 @@ function Profile() {
   const addDefaultSrc = (e) => {
     e.target.src = avatarImg;
   };
+
   return (
     <>
       <div className={styles.content}>
@@ -83,7 +91,7 @@ function Profile() {
           className={`card d-flex justify-content-center align-items-center border-0 ${styles.card_header}`}
         >
           <img
-            src={data[0]?.photo || avatarImg}
+            src={dataProfile[0]?.photo || avatarImg}
             onError={addDefaultSrc}
             alt="image"
             className="rounded-circle border border-2 border-warning"
@@ -101,7 +109,7 @@ function Profile() {
             <h3 className="text-muted fw-bold mt-3">
               <i className="bi bi-camera-fill"></i>
             </h3>
-            <p className="mt-3 fw-bold fs-5">{userData?.name || "Name"}</p>
+            <p className="mt-3 fw-bold fs-5">{dataProfile[0]?.name}</p>
             <button
               type="submit"
               className="btn btn-primary px-5 py-2"
