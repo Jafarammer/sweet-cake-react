@@ -21,14 +21,16 @@ function Profile() {
   // cek localstorage
   useEffect(() => {
     if (!localStorage.getItem("token")) {
-      navigate("/login");
-      // window.location.href = "/login";
-    } else {
-      axios
-        .get(`https://sweet-cake-react.web.app/users/id/${userData.id}`)
-        .then((res) => setData(res.data.data));
+      window.location.href = "/login";
     }
   });
+  useEffect(() => {
+    axios
+      .get(`https://sweet-cake-react.web.app/users/id/${userData.id}`)
+      .then((res) => {
+        console.log(res.data);
+      });
+  }, []);
 
   const userUpdate = () => {
     setIsLoading(true);
