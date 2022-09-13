@@ -25,7 +25,7 @@ function Profile() {
       // window.location.href = "/login";
     } else {
       axios
-        .get(`http://localhost:8000/users/id/${userData.id}`)
+        .get(`https://sweet-cake-react.web.app/users/id/${userData.id}`)
         .then((res) => setData(res.data.data));
     }
   }, []);
