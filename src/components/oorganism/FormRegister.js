@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+// axios
+import axiosInstance from "../../helper/axios";
 import Swal from "sweetalert2";
 // atom
 import CheckBox from "../atom/CheckBox";
@@ -16,8 +17,8 @@ function FormRegister() {
 
   const handleRegister = () => {
     setIsLoading(true);
-    axios
-      .post("https://sweet-cake-chef.herokuapp.com/register", {
+    axiosInstance
+      .post("/register", {
         name: name,
         email: email,
         phone_number: phone_number,

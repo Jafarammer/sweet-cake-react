@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+// axios
+import axiosInstance from "../../helper/axios";
+import { Link } from "react-router-dom";
 // sweet alert
 import Swal from "sweetalert2";
 //atom
-// import InputText from "../atom/InputText"; problem =  if make inputtext component not value
 import CheckBox from "../atom/CheckBox";
 // css
 import styles from "../../css/Login.module.css";
 
 function FormLogin() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -18,8 +17,8 @@ function FormLogin() {
   const handleLogin = () => {
     document.getElementById("reset-form").reset();
     setIsLoading(true);
-    axios
-      .post("https://sweet-cake-chef.herokuapp.com/login", {
+    axiosInstance
+      .post("/login", {
         email: email,
         password: password,
       })
@@ -32,7 +31,6 @@ function FormLogin() {
           text: localStorage.getItem("message"),
         });
         setTimeout(() => {
-          //   navigate("/");
           window.location.href = "/";
         }, 1000);
       })

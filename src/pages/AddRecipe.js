@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import axios from "axios";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+// axios
+import axiosInstance from "../helper/axios";
+import Swal from "sweetalert2";
 // context
 import { ProfileContext } from "../context";
 // css
@@ -36,9 +37,9 @@ function AddRecipe() {
     formData.append("ingredients", ingredients);
     formData.append("photo", file);
     formData.append("user_id", userData.id);
-    await axios
+    await axiosInstance
       .post(
-        "https://sweet-cake-chef.herokuapp.com/recipe/add",
+        "/recipe/add",
         formData,
         {
           headers: {

@@ -1,7 +1,8 @@
 // import { json } from "body-parser";
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+// axios
+import axiosInstance from "../helper/axios";
 import Swal from "sweetalert2";
 // context
 import { ProfileContext } from "../context";
@@ -21,8 +22,8 @@ function DetailRecipe() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`https://sweet-cake-chef.herokuapp.com/recipe/id/${params.id}`)
+    axiosInstance
+      .get(`/recipe/id/${params.id}`)
       .then((res) => setDataRecipe(res.data.data));
   }, []);
 
@@ -37,9 +38,9 @@ function DetailRecipe() {
         navigate("/login");
       }, 3000);
     } else {
-      await axios
+      await axiosInstance
         .post(
-          `https://sweet-cake-chef.herokuapp.com/comment/add`,
+          `/comment/add`,
           {
             comment_message: comment_message,
             user_id: userData.id,

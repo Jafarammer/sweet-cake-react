@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+// axios
+import axiosInstance from "../../helper/axios";
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper";
@@ -22,10 +23,8 @@ function Tabs() {
   };
   // cek localstorage
   useEffect(() => {
-    axios
-      .get(
-        `https://sweet-cake-chef.herokuapp.com/recipe/recipebyuser/${userData.id}`
-      )
+    axiosInstance
+      .get(`http://localhost:8000/recipe/recipebyuser/${userData.id}`)
       .then((res) => setDataRecipe(res.data.recipe));
   }, []);
   return (

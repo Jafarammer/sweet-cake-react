@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+// axios
+import axiosInstance from "../helper/axios";
 import Swal from "sweetalert2";
 // context
 import { ProfileContext } from "../context";
@@ -22,10 +23,8 @@ function Profile() {
       // navigate("/login");
       window.location.href = "/login";
     } else {
-      axios
-        .get(
-          `https://sweet-cake-chef.herokuapp.com/users/id/${userDataContext.id}`
-        )
+      axiosInstance
+        .get(`/users/id/${userDataContext.id}`)
         .then((res) => setDataProfile(res.data.data));
     }
   }, []);
@@ -34,23 +33,12 @@ function Profile() {
     setIsLoading(true);
     const formData = new FormData();
     formData.append("photo", photo);
-
-    // const config = {
-    //   headers: {
-    //     "content-type": "multipart/form-data",
-    //   },
-    // };
-    // const url = `http://localhost:8000/users/edit/${dataProfile[0]?.id}`;
-    await axios
-      .patch(
-        `https://sweet-cake-chef.herokuapp.com/users/edit/${dataProfile[0]?.id}`,
-        formData,
-        {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        }
-      )
+    await axiosInstance
+      .patch(`/users/edit/${dataProfile[0]?.id}`, formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         Swal.fire({
           icon: "success",

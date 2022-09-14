@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+// axios
+import axiosInstance from "../../helper/axios";
 // css
 import styles from "../../css/DetailRecipe.module.css";
 import defaultImg from "../../images/avatar.jpg";
@@ -9,10 +10,8 @@ function CardComment() {
   const paramsResult = useParams();
   const [dataComment, setDataComment] = useState([]);
   useEffect(() => {
-    axios
-      .get(
-        `https://sweet-cake-chef.herokuapp.com/comment/comment/${paramsResult.id}`
-      )
+    axiosInstance
+      .get(`/comment/comment/${paramsResult.id}`)
       .then((res) => setDataComment(res.data.data));
   }, []);
   const addDefaultSrc = (e) => {

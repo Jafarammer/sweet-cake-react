@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+// axios
+import axiosInstance from "../../helper/axios";
 //molecules
 import HeadSection from "../molecules/HeadSection";
 // css
@@ -12,9 +13,7 @@ function PopulerRecipe() {
   const navigate = useNavigate();
   const [listImg, setListImg] = useState([]);
   useEffect(() => {
-    axios
-      .get("https://sweet-cake-chef.herokuapp.com/recipe")
-      .then((res) => setListImg(res.data.data));
+    axiosInstance.get("/recipe").then((res) => setListImg(res.data.data));
   });
   return (
     <>
