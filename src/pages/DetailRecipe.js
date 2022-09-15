@@ -1,24 +1,24 @@
 // import { json } from "body-parser";
-import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 // axios
-import axiosInstance from "../helper/axios";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
+import axiosInstance from '../helper/axios';
 // context
-import { ProfileContext } from "../context";
+import { ProfileContext } from '../context';
 // organism
-import CardComment from "../components/oorganism/CardComment";
+import CardComment from '../components/oorganism/CardComment';
 // css
-import styles from "../css/DetailRecipe.module.css";
+import styles from '../css/DetailRecipe.module.css';
 // image
-import defaultImg from "../images/default.svg";
+import defaultImg from '../images/default.svg';
 
 function DetailRecipe() {
   const navigate = useNavigate();
   const userData = useContext(ProfileContext);
   const params = useParams();
   const [dataRecipe, setDataRecipe] = useState([]);
-  const [comment_message, setCommentMessage] = useState("");
+  const [comment_message, setCommentMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -29,28 +29,28 @@ function DetailRecipe() {
 
   const handleComment = async () => {
     setIsLoading(true);
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem('token')) {
       setTimeout(() => {
         Swal.fire({
-          icon: "error",
-          text: "You are not logged in",
+          icon: 'error',
+          text: 'You are not logged in',
         });
-        navigate("/login");
+        navigate('/login');
       }, 3000);
     } else {
       await axiosInstance
         .post(
-          `/comment/add`,
+          '/comment/add',
           {
-            comment_message: comment_message,
+            comment_message,
             user_id: userData.id,
             recipe_id: params.id,
           },
-          []
+          [],
         )
         .then((res) => {
           Swal.fire({
-            icon: "success",
+            icon: 'success',
             text: res.data.message,
           });
           setTimeout(() => {
@@ -59,7 +59,7 @@ function DetailRecipe() {
         })
         .catch((error) => {
           Swal.fire({
-            icon: "error",
+            icon: 'error',
             text: `${error?.response.data}`,
           });
           console.log(error);
@@ -81,16 +81,16 @@ function DetailRecipe() {
             <img
               src={dataRecipe[0]?.photo || defaultImg}
               alt="image"
-              crossorigin="anonymous"
+              crossOrigin="anonymous"
             />
             <div
               className={`position-absolute fixed-bottom d-flex justify-content-end mb-5 ${styles.d_icon}`}
             >
               <h1 className="border border-warning ms-3 me-5 p-2 bg-warning text-light">
-                <i className="bi bi-bookmark"></i>
+                <i className="bi bi-bookmark" />
               </h1>
               <h1 className="border border-warning ms-3 me-5 p-2 bg-warning text-light">
-                <i class="bi bi-hand-thumbs-up"></i>
+                <i className="bi bi-hand-thumbs-up" />
               </h1>
             </div>
           </div>
@@ -99,7 +99,7 @@ function DetailRecipe() {
 
         <p
           dangerouslySetInnerHTML={{
-            __html: dataRecipe[0]?.ingredients?.split("\n").join("<br />"),
+            __html: dataRecipe[0]?.ingredients?.split('\n').join('<br />'),
           }}
         />
         <h1 className="text-muted mt-5">Video Step</h1>
@@ -108,13 +108,13 @@ function DetailRecipe() {
             className="btn btn-warning text-light fs-3 px-5 mt-4"
             disabled
           >
-            <i className="bi bi-play-fill mx-5"></i>
+            <i className="bi bi-play-fill mx-5" />
           </button>
           <button
             className="btn btn-warning text-light fs-3 px-5 mt-4"
             disabled
           >
-            <i className="bi bi-play-fill mx-5"></i>
+            <i className="bi bi-play-fill mx-5" />
           </button>
         </div>
         <form className="my-5 text-center" onSubmit={(e) => e.preventDefault()}>
@@ -123,11 +123,11 @@ function DetailRecipe() {
               className="form-control"
               placeholder="Leave a comment here"
               id="floatingTextarea2"
-              style={{ height: "200px" }}
-              // value={commentMessage}
+              style={{ height: '200px' }}
+                            // value={commentMessage}
               onChange={(e) => setCommentMessage(e.target.value)}
             />
-            <label for="floatingTextarea2" className="text-start ms-4">
+            <label htmlFor="floatingTextarea2" className="text-start ms-4">
               Comments
             </label>
           </div>
@@ -138,9 +138,9 @@ function DetailRecipe() {
             disabled={isLoading}
           >
             {isLoading && (
-              <span className="spinner-border spinner-border-sm me-2"></span>
+            <span className="spinner-border spinner-border-sm me-2" />
             )}
-            {isLoading ? "Loading..." : "Send"}
+            {isLoading ? 'Loading...' : 'Send'}
           </button>
         </form>
         {/* result comment */}

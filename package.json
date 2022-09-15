@@ -24,12 +24,6 @@
     "eject": "react-scripts eject",
     "build:firebase": "env-cmd -f .env.local npm run build && firebase deploy -P sweet-cake-react"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",

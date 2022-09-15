@@ -1,5 +1,5 @@
-import React from "react";
-import { PropTypes } from "prop-types";
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 function TextHeader(props) {
   const { title, desc } = props;
@@ -17,8 +17,8 @@ TextHeader.propTypes = {
 };
 
 TextHeader.defaultProps = {
-  title: "Unknown title",
-  desc: "Unknown description",
+  title: 'Unknown title',
+  desc: 'Unknown description',
 };
 
 export default TextHeader;

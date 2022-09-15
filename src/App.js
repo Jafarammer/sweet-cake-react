@@ -15,10 +15,11 @@ import Register from "./pages/auth/Register";
 import Logout from "./pages/auth/Logout";
 import AddRecipe from "./pages/AddRecipe";
 import DetailRecipe from "./pages/DetailRecipe";
+import Search from "./pages/Search";
 
 function App() {
   // const ProfileContext = React.createContext({});
-  axios.interceptors.request.use(function (config) {
+  axios.interceptors.request.use((config) => {
     if (localStorage.getItem("token")) {
       config.headers = {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -37,6 +38,7 @@ function App() {
             <Route path="logout" element={<Logout />} />
             <Route path="/addRecipe" element={<AddRecipe />} />
             <Route path="/detail/:id" element={<DetailRecipe />} />
+            <Route path="/searchPage/:keyword" element={<Search />} />
           </Route>
           <Route element={<HideLayout />}>
             <Route path="login" element={<Login />} />

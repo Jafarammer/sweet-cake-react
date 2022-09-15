@@ -2,9 +2,6 @@
   min-height: 100vh;
   overflow: hidden;
 }
-.d_container {
-  /* border: 1px solid red; */
-}
 .d_card {
   width: 80vw;
   height: 70vh;
@@ -12,7 +9,6 @@
 }
 .d_card h1 {
   cursor: pointer;
-  /* z-index: 1 !important; */
   border-radius: 10px;
 }
 .d_icon {
