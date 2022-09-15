@@ -34,6 +34,14 @@
 .card_myRecipe p {
   position: absolute;
 }
+.card_myRecipe i {
+  position: absolute;
+  color: red;
+  cursor: pointer;
+}
+.card_myRecipe i:hover {
+  color: rgb(160, 4, 4);
+}
 
 .hide_file {
   position: absolute;

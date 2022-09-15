@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 // axios
+import axiosInstance from "../../helper/axios";
+import Swal from "sweetalert2";
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper";
-import axiosInstance from "../../helper/axios";
 import "swiper/css";
 import "swiper/css/free-mode";
 // context
@@ -14,6 +16,7 @@ import defaultImg from "../../images/comingSoon.svg";
 import styles from "../../css/Profile.module.css";
 
 function Tabs() {
+  const navigate = useNavigate();
   const userData = useContext(ProfileContext);
   const [toggleState, setToggleState] = useState(1);
   const [dataRecipe, setDataRecipe] = useState([]);
@@ -27,6 +30,25 @@ function Tabs() {
       .get(`/recipe/recipebyuser/${userData.id}`)
       .then((res) => setDataRecipe(res.data.recipe));
   }, []);
+  const handleDeleteRecipe = () => {
+    axiosInstance
+      .delete(`/recipe/delete/${dataRecipe[0]?.id}`)
+      .then((res) => {
+        Swal.fire({
+          icon: "success",
+          text: `Delete ${dataRecipe[0]?.title_recipe} successfully`,
+        });
+        setTimeout(() => {
+          navigate(0);
+        }, 1500);
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          text: `${error?.response.data}`,
+        });
+      });
+  };
   return (
     <>
       <div>
@@ -90,6 +112,10 @@ function Tabs() {
                       alt="image"
                       crossOrigin="anonymous"
                     />
+                    <i
+                      className="bi bi-trash-fill ms-3 mt-2 fs-4"
+                      onClick={handleDeleteRecipe}
+                    ></i>
                     <p className="fixed-bottom ms-3 text-light">
                       {item?.title_recipe}
                     </p>
