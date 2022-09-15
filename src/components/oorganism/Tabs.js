@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
 // axios
 // swiper
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper';
-import axiosInstance from '../../helper/axios';
-import 'swiper/css';
-import 'swiper/css/free-mode';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper";
+import axiosInstance from "../../helper/axios";
+import "swiper/css";
+import "swiper/css/free-mode";
 // context
-import { ProfileContext } from '../../context';
+import { ProfileContext } from "../../context";
 // images
-import defaultImg from '../../images/comingSoon.svg';
+import defaultImg from "../../images/comingSoon.svg";
 // css
-import styles from '../../css/Profile.module.css';
+import styles from "../../css/Profile.module.css";
 
 function Tabs() {
   const userData = useContext(ProfileContext);
@@ -24,7 +24,7 @@ function Tabs() {
   // cek localstorage
   useEffect(() => {
     axiosInstance
-      .get(`http://localhost:8000/recipe/recipebyuser/${userData.id}`)
+      .get(`/recipe/recipebyuser/${userData.id}`)
       .then((res) => setDataRecipe(res.data.recipe));
   }, []);
   return (
@@ -35,8 +35,8 @@ function Tabs() {
             <button
               className={
                 toggleState === 1
-                  ? 'nav-link active bg-light text-warning fw-bold'
-                  : 'nav-link text-muted fw-bold'
+                  ? "nav-link active bg-light text-warning fw-bold"
+                  : "nav-link text-muted fw-bold"
               }
               onClick={() => toggleTab(1)}
             >
@@ -47,8 +47,8 @@ function Tabs() {
             <button
               className={
                 toggleState === 2
-                  ? 'nav-link active bg-light text-warning fw-bold'
-                  : 'nav-link text-muted fw-bold'
+                  ? "nav-link active bg-light text-warning fw-bold"
+                  : "nav-link text-muted fw-bold"
               }
               onClick={() => toggleTab(2)}
             >
@@ -59,8 +59,8 @@ function Tabs() {
             <button
               className={
                 toggleState === 3
-                  ? 'nav-link active bg-light text-warning fw-bold'
-                  : 'nav-link text-muted fw-bold'
+                  ? "nav-link active bg-light text-warning fw-bold"
+                  : "nav-link text-muted fw-bold"
               }
               onClick={() => toggleTab(3)}
             >
@@ -72,7 +72,7 @@ function Tabs() {
 
       <div className={`container mt-5 ${styles.d_container}`}>
         {/* conten my recipe */}
-        <div className={toggleState === 1 ? 'd-block' : 'd-none'}>
+        <div className={toggleState === 1 ? "d-block" : "d-none"}>
           <div className="row">
             <Swiper
               freeMode
@@ -100,11 +100,11 @@ function Tabs() {
           </div>
         </div>
         {/* content save recipe */}
-        <div className={toggleState === 2 ? 'd-block' : 'd-none'}>
+        <div className={toggleState === 2 ? "d-block" : "d-none"}>
           <h1>Coming soon save recipe</h1>
         </div>
         {/* content like recipe */}
-        <div className={toggleState === 3 ? 'd-block' : 'd-none'}>
+        <div className={toggleState === 3 ? "d-block" : "d-none"}>
           <h1>Coming soon like recipe</h1>
         </div>
       </div>
