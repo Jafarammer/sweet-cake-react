@@ -1,26 +1,17 @@
-import React, { useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import React, { useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 // molecules
-import TextHeader from '../../components/molecules/TextHeader';
+import TextHeader from "../../components/molecules/TextHeader";
 // oraganism
-import FormRegister from '../../components/oorganism/FormRegister';
+import FormRegister from "../../components/oorganism/FormRegister";
 // css
-import styles from '../../css/Register.module.css';
+import styles from "../../css/Register.module.css";
 // image
-import registerImg from '../../images/register.png';
+import registerImg from "../../images/register.png";
 
 function Register() {
   const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      Swal.fire({
-        icon: 'error',
-        text: 'You have login!!!',
-      });
-      navigate('/');
-    }
-  });
   return (
     <div className="overflow-hidden p-0 m-0">
       <div className="row">

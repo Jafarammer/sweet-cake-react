@@ -1,24 +1,25 @@
 // import { json } from "body-parser";
-import React, { useEffect, useState, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+// redux
+import { useSelector } from "react-redux";
 // axios
-import Swal from 'sweetalert2';
-import axiosInstance from '../helper/axios';
-// context
-import { ProfileContext } from '../context';
+import axiosInstance from "../helper/axios";
+import Swal from "sweetalert2";
 // organism
-import CardComment from '../components/oorganism/CardComment';
+import CardComment from "../components/oorganism/CardComment";
 // css
-import styles from '../css/DetailRecipe.module.css';
+import styles from "../css/DetailRecipe.module.css";
 // image
-import defaultImg from '../images/default.svg';
+import defaultImg from "../images/default.svg";
 
 function DetailRecipe() {
+  const { profile } = useSelector((state) => state?.auth);
+  const { token } = useSelector((state) => state?.auth);
   const navigate = useNavigate();
-  const userData = useContext(ProfileContext);
   const params = useParams();
   const [dataRecipe, setDataRecipe] = useState([]);
-  const [comment_message, setCommentMessage] = useState('');
+  const [comment_message, setCommentMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -29,28 +30,28 @@ function DetailRecipe() {
 
   const handleComment = async () => {
     setIsLoading(true);
-    if (!localStorage.getItem('token')) {
+    if (!token) {
       setTimeout(() => {
         Swal.fire({
-          icon: 'error',
-          text: 'You are not logged in',
+          icon: "error",
+          text: "You are not logged in",
         });
-        navigate('/login');
-      }, 3000);
+        navigate("/login");
+      }, 2000);
     } else {
       await axiosInstance
         .post(
-          '/comment/add',
+          "/comment/add",
           {
             comment_message,
-            user_id: userData.id,
+            user_id: profile?.id,
             recipe_id: params.id,
           },
-          [],
+          []
         )
         .then((res) => {
           Swal.fire({
-            icon: 'success',
+            icon: "success",
             text: res.data.message,
           });
           setTimeout(() => {
@@ -59,7 +60,7 @@ function DetailRecipe() {
         })
         .catch((error) => {
           Swal.fire({
-            icon: 'error',
+            icon: "error",
             text: `${error?.response.data}`,
           });
           console.log(error);
@@ -99,7 +100,7 @@ function DetailRecipe() {
 
         <p
           dangerouslySetInnerHTML={{
-            __html: dataRecipe[0]?.ingredients?.split('\n').join('<br />'),
+            __html: dataRecipe[0]?.ingredients?.split("\n").join("<br />"),
           }}
         />
         <h1 className="text-muted mt-5">Video Step</h1>
@@ -123,8 +124,8 @@ function DetailRecipe() {
               className="form-control"
               placeholder="Leave a comment here"
               id="floatingTextarea2"
-              style={{ height: '200px' }}
-                            // value={commentMessage}
+              style={{ height: "200px" }}
+              // value={commentMessage}
               onChange={(e) => setCommentMessage(e.target.value)}
             />
             <label htmlFor="floatingTextarea2" className="text-start ms-4">
@@ -138,9 +139,9 @@ function DetailRecipe() {
             disabled={isLoading}
           >
             {isLoading && (
-            <span className="spinner-border spinner-border-sm me-2" />
+              <span className="spinner-border spinner-border-sm me-2" />
             )}
-            {isLoading ? 'Loading...' : 'Send'}
+            {isLoading ? "Loading..." : "Send"}
           </button>
         </form>
         {/* result comment */}

@@ -8,6 +8,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper";
 import "swiper/css";
 import "swiper/css/free-mode";
+// redux
+import { useSelector } from "react-redux";
 // context
 import { ProfileContext } from "../../context";
 // images
@@ -17,6 +19,7 @@ import styles from "../../css/Profile.module.css";
 
 function Tabs() {
   const navigate = useNavigate();
+  const { profile } = useSelector((state) => state?.auth);
   const userData = useContext(ProfileContext);
   const [toggleState, setToggleState] = useState(1);
   const [dataRecipe, setDataRecipe] = useState([]);
@@ -27,7 +30,7 @@ function Tabs() {
   // cek localstorage
   useEffect(() => {
     axiosInstance
-      .get(`/recipe/recipebyuser/${userData.id}`)
+      .get(`/recipe/recipebyuser/${profile?.id}`)
       .then((res) => setDataRecipe(res.data.recipe));
   }, []);
   const handleDeleteRecipe = () => {

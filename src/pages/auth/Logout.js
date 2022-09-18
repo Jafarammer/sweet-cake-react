@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+// redux
+import { connect } from "react-redux";
+import { authLogin } from "../../redux/reducers/authReducer";
 // css
-import styles from '../../css/Logout.module.css';
+import styles from "../../css/Logout.module.css";
 
-function Logout() {
+function Logout(props) {
   const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
-      localStorage.clear();
-      navigate('/login');
+      props.setLogout();
+      navigate("/login");
     }, 2000);
   });
 
@@ -23,4 +26,12 @@ function Logout() {
   );
 }
 
-export default Logout;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+const mapDispatchToProps = (dispatch) => ({
+  setLogout: () => dispatch({ type: "SET_LOGOUT" }),
+  authRequestLogin: (data) => dispatch(authLogin(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Logout);

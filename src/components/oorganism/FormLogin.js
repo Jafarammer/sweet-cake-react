@@ -1,56 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+// redux
+import { connect } from "react-redux";
+import { authLogin } from "../../redux/reducers/authReducer";
 // axios
-import { Link } from 'react-router-dom';
-// sweet alert
-import Swal from 'sweetalert2';
-import axiosInstance from '../../helper/axios';
+import { Link } from "react-router-dom";
 // atom
-import CheckBox from '../atom/CheckBox';
+import CheckBox from "../atom/CheckBox";
 // css
-import styles from '../../css/Login.module.css';
+import styles from "../../css/Login.module.css";
 
-function FormLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+function FormLogin(props) {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    document.getElementById('reset-form').reset();
-    setIsLoading(true);
-    axiosInstance
-      .post('/login', {
-        email,
-        password,
-      })
-      .then((res) => {
-        localStorage.setItem('token', res?.data?.token);
-        localStorage.setItem('user', JSON.stringify(res?.data?.user));
-        localStorage.setItem('message', res?.data?.message);
-        Swal.fire({
-          icon: 'success',
-          text: localStorage.getItem('message'),
-        });
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 1000);
-      })
-      .catch((err) => {
-        Swal.fire({
-          icon: 'error',
-          text: `${err?.response.data}`,
-        });
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  useEffect(() => {
+    if (props.auth.token) {
+      navigate("/");
+    }
+  }, [props.auth]);
+
+  const handleLogin = (value) => {
+    props.authRequestLogin({
+      email: value?.email ?? email,
+      password: value?.password ?? password,
+    });
   };
 
   return (
-    <form
-      className="px-5"
-      id="reset-form"
-      onSubmit={(e) => e.preventDefault()}
-    >
+    <form className="px-5" id="reset-form" onSubmit={(e) => e.preventDefault()}>
       {/* Email */}
       <div className="mb-3 px-5 mx-5">
         <label className="form-label mb-3" htmlFor="inputEmail">
@@ -84,26 +63,19 @@ function FormLogin() {
         <button
           className="btn btn-warning text-white fw-bold mx-5 py-3"
           type="reset"
-          disabled={isLoading}
+          disabled={props.auth?.loading}
           onClick={handleLogin}
         >
-          {isLoading && (
-          <span className="spinner-border spinner-border-sm me-2" />
+          {props.auth?.loading && (
+            <span className="spinner-border spinner-border-sm me-2" />
           )}
-          {isLoading ? 'Loading...' : 'Login'}
+          {props.auth?.loading ? "Loading..." : "Login"}
         </button>
         <p className={`text-end text-muted px-5 ${styles.text_forgot}`}>
           Forgot Password ?
         </p>
         <p className="text-center mt-3">
-          Don't have an account ?
-          {' '}
-          {/* <a
-              href="/register"
-              className="text-warning fw-bold text-decoration-none ms-2"
-            >
-              Sign Up
-            </a> */}
+          Don't have an account ?{" "}
           <Link to="/register" className="text-decoration-none">
             <small className="text-warning fw-bold ms-2 fs-6">Sign Up</small>
           </Link>
@@ -113,4 +85,12 @@ function FormLogin() {
   );
 }
 
-export default FormLogin;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+const mapDispatchToProps = (dispatch) => ({
+  setProfile: (data) => dispatch({ type: "SET_PROFILE", data: data }),
+  authRequestLogin: (data) => dispatch(authLogin(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);

@@ -1,28 +1,21 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // axios
-import Swal from 'sweetalert2';
-import axiosInstance from '../helper/axios';
-// context
-import { ProfileContext } from '../context';
+import axiosInstance from "../helper/axios";
+import Swal from "sweetalert2";
+// redux
+import { useSelector } from "react-redux";
 // css
-import styles from '../css/AddRecipe.module.css';
+import styles from "../css/AddRecipe.module.css";
 
 function AddRecipe() {
-  const userData = useContext(ProfileContext);
+  const { profile } = useSelector((state) => state?.auth);
   const navigate = useNavigate();
-  const [title, setTitle] = useState('');
-  const [ingredients, setIngredients] = useState('');
-  const [file, setFile] = useState('');
-  const [preview, setPreview] = useState('');
+  const [title, setTitle] = useState("");
+  const [ingredients, setIngredients] = useState("");
+  const [file, setFile] = useState("");
+  const [preview, setPreview] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  // cek localstorage
-  useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      navigate('/login');
-    }
-  }, []);
 
   const loadImage = (e) => {
     const image = e.target.files[0];
@@ -33,33 +26,33 @@ function AddRecipe() {
   const saveRecipe = async () => {
     setIsLoading(true);
     const formData = new FormData();
-    formData.append('title_recipe', title);
-    formData.append('ingredients', ingredients);
-    formData.append('photo', file);
-    formData.append('user_id', userData.id);
+    formData.append("title_recipe", title);
+    formData.append("ingredients", ingredients);
+    formData.append("photo", file);
+    formData.append("user_id", profile?.id);
     await axiosInstance
       .post(
-        '/recipe/add',
+        "/recipe/add",
         formData,
         {
           headers: {
-            'Content-type': 'multipart/form-data',
+            "Content-type": "multipart/form-data",
           },
         },
-        [],
+        []
       )
       .then((res) => {
         Swal.fire({
-          icon: 'success',
-          text: 'Add Recipe successfully',
+          icon: "success",
+          text: "Add Recipe successfully",
         });
         setTimeout(() => {
-          navigate('/');
+          navigate("/");
         }, 2000);
       })
       .catch((error) => {
         Swal.fire({
-          icon: 'error',
+          icon: "error",
           text: `${error?.response.data}`,
         });
       })
@@ -104,9 +97,9 @@ function AddRecipe() {
                     disabled={isLoading}
                   >
                     {isLoading && (
-                        <span className="spinner-border spinner-border-sm me-2" />
-                      )}
-                    {isLoading ? 'Loading...' : 'Post'}
+                      <span className="spinner-border spinner-border-sm me-2" />
+                    )}
+                    {isLoading ? "Loading..." : "Post"}
                   </button>
                 </div>
               </form>
@@ -122,7 +115,7 @@ function AddRecipe() {
                 <img src={preview} alt="Preview Image" />
               </div>
             ) : (
-              ''
+              ""
             )}
           </div>
         </div>

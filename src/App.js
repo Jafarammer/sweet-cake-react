@@ -2,6 +2,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
+// redux
+import { Provider } from "react-redux";
+import { store, persistor } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+// context
 import { ProfileContext } from "./context";
 // css global
 // import "./App.css";
@@ -28,25 +33,27 @@ function App() {
     return config;
   });
   return (
-    <ProfileContext.Provider value={JSON.parse(localStorage.getItem("user"))}>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<ShowLayout />}>
-            <Route path="/" element={<App />} />
-            <Route index element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="logout" element={<Logout />} />
-            <Route path="/addRecipe" element={<AddRecipe />} />
-            <Route path="/detail/:id" element={<DetailRecipe />} />
-            <Route path="/searchPage/:keyword" element={<Search />} />
-          </Route>
-          <Route element={<HideLayout />}>
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </ProfileContext.Provider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<ShowLayout />}>
+              <Route path="/" element={<App />} />
+              <Route index element={<Home />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/addRecipe" element={<AddRecipe />} />
+              <Route path="/detail/:id" element={<DetailRecipe />} />
+              <Route path="/searchPage/:keyword" element={<Search />} />
+            </Route>
+            <Route element={<HideLayout />}>
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route path="logout" element={<Logout />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   );
 }
 

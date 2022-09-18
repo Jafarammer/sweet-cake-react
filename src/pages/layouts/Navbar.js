@@ -1,11 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ProfileContext } from '../../context';
+import React from "react";
+import { Link } from "react-router-dom";
+// redux
+import { useSelector } from "react-redux";
 // css
-import styles from '../../css/Navbar.module.css';
+import styles from "../../css/Navbar.module.css";
 
 function Navbar() {
-  const ProfileName = React.useContext(ProfileContext);
+  const { token } = useSelector((state) => state?.auth);
+  const { profile } = useSelector((state) => state?.auth);
   return (
     <nav
       className={`navbar navbar-expand-lg navbar-light bg-light sticky-top py-3 px-5 ${styles.d_nav}`}
@@ -29,20 +31,32 @@ function Navbar() {
             </Link>
           </li>
           <li className="nav-item mx-2 nav-link active fw-bold">
-            <Link
-              to="/addRecipe"
-              className="text-decoration-none text-secondary"
-            >
-              Add recipe
-            </Link>
+            {token ? (
+              <Link
+                to="/addRecipe"
+                className="text-decoration-none text-secondary"
+              >
+                Add recipe
+              </Link>
+            ) : (
+              <Link to="/login" className="text-decoration-none text-secondary">
+                Add recipe
+              </Link>
+            )}
           </li>
           <li className="nav-item mx-2 nav-link active fw-bold">
-            <Link
-              to="/profile"
-              className="text-decoration-none text-secondary"
-            >
-              Profile
-            </Link>
+            {token ? (
+              <Link
+                to="/profile"
+                className="text-decoration-none text-secondary"
+              >
+                Profile
+              </Link>
+            ) : (
+              <Link to="/login" className="text-decoration-none text-secondary">
+                Profile
+              </Link>
+            )}
           </li>
         </ul>
         <div className="btn-group">
@@ -54,7 +68,8 @@ function Navbar() {
             aria-expanded="false"
           >
             <small className="me-3 fw-bold fs-6">
-              {ProfileName?.name || 'Username'}
+              {/* {props.auth.profile.name || null} */}
+              {profile?.name || "Username"}
             </small>
           </button>
           <ul className="dropdown-menu dropdown-menu-lg-end">
@@ -85,5 +100,4 @@ function Navbar() {
     </nav>
   );
 }
-
 export default Navbar;
