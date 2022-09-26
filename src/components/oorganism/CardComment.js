@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 // axios
-import axiosInstance from '../../helper/axios';
+import axiosInstance from "../../helper/axios";
 // css
-import styles from '../../css/DetailRecipe.module.css';
-import defaultImg from '../../images/avatar.jpg';
+import styles from "../../css/DetailRecipe.module.css";
+import defaultImg from "../../images/avatar.jpg";
 
 function CardComment() {
   const paramsResult = useParams();
@@ -23,7 +23,7 @@ function CardComment() {
         <div className="d-flex align-items-center mb-3">
           <div className="flex-shrink-0 rounded-circle border border-warning">
             <img
-              src={item?.photo || defaultImg}
+              src={item?.photo_profile || defaultImg}
               onError={addDefaultSrc}
               alt="image"
               className={`${styles.img_comment} rounded-circle`}
