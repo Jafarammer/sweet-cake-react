@@ -74,7 +74,7 @@ function Profile() {
         className={`card d-flex justify-content-center align-items-center border-0 ${styles.card_header}`}
       >
         <img
-          src={dataProfile[0]?.photo || avatarImg}
+          src={dataProfile[0]?.photo_profile || avatarImg}
           onError={addDefaultSrc}
           alt="image"
           className="rounded-circle border border-2 border-warning"

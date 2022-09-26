@@ -33,25 +33,6 @@ function Tabs() {
       .get(`/recipe/recipebyuser/${profile?.id}`)
       .then((res) => setDataRecipe(res.data.recipe));
   }, []);
-  const handleDeleteRecipe = () => {
-    axiosInstance
-      .delete(`/recipe/delete/${dataRecipe[0]?.id}`)
-      .then((res) => {
-        Swal.fire({
-          icon: "success",
-          text: `Delete ${dataRecipe[0]?.title_recipe} successfully`,
-        });
-        setTimeout(() => {
-          navigate(0);
-        }, 1500);
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          text: `${error?.response.data}`,
-        });
-      });
-  };
   return (
     <>
       <div>
@@ -117,7 +98,25 @@ function Tabs() {
                     />
                     <i
                       className="bi bi-trash-fill ms-3 mt-2 fs-4"
-                      onClick={handleDeleteRecipe}
+                      onClick={() =>
+                        axiosInstance
+                          .delete(`/recipe/delete/${item?.id}`)
+                          .then((res) => {
+                            Swal.fire({
+                              icon: "success",
+                              text: `Delete ${item?.title_recipe} successfully`,
+                            });
+                            setTimeout(() => {
+                              navigate(0);
+                            }, 1500);
+                          })
+                          .catch((error) => {
+                            Swal.fire({
+                              icon: "error",
+                              text: `${error?.response.data}`,
+                            });
+                          })
+                      }
                     ></i>
                     <p className="fixed-bottom ms-3 text-light">
                       {item?.title_recipe}
