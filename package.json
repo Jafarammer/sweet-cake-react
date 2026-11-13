@@ -11,6 +11,7 @@
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
     "formik": "^2.4.9",
+    "libphonenumber-js": "^1.13.16",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

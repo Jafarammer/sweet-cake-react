@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import { Row, Col, Typography } from "antd";
 import ImageBg from "../../images/login.png";
 import FromLogin from "../../components/FromLogin";
+import useLogin from "../../hooks/useLogin";
 import "./styles.scss";
 
 const { Title, Text } = Typography;
 
 const Login = () => {
+  // hooks
+  const login = useLogin();
   return (
     <div className="login-page">
       <Row>
@@ -19,7 +22,9 @@ const Login = () => {
             <Text className="desc" type="secondary">
               Log in into your account
             </Text>
-            <FromLogin />
+
+            <FromLogin formik={login.formik} />
+
             <div className="content-link">
               <Text type="secondary" className="text">
                 Don't have an account?

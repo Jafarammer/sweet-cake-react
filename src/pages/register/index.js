@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import { Row, Col, Typography } from "antd";
 import ImageBg from "../../images/register.png";
 import FormRegister from "../../components/FormRegister";
+import useRegister from "../../hooks/useRegister";
 import "./styles.scss";
 
 const { Title, Text } = Typography;
 
 const Register = () => {
+  // hooks
+  const register = useRegister();
   return (
     <div className="register-page">
       <Row>
@@ -20,7 +23,7 @@ const Register = () => {
               Create new account to access all features
             </Text>
 
-            <FormRegister />
+            <FormRegister formik={register.formik} />
 
             <div className="content-link">
               <Text type="secondary" className="text">
