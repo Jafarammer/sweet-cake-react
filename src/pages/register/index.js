@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Typography, Form, Input, Button, InputNumber } from "antd";
+import { Row, Col, Typography } from "antd";
 import ImageBg from "../../images/register.png";
+import FormRegister from "../../components/FormRegister";
 import "./styles.scss";
 
 const { Title, Text } = Typography;
@@ -19,39 +20,7 @@ const Register = () => {
               Create new account to access all features
             </Text>
 
-            <Form layout="vertical">
-              <Form.Item label="Name">
-                <Input size="large" name="name" />
-              </Form.Item>
-              <Form.Item label="Email">
-                <Input
-                  size="large"
-                  name="email"
-                  placeholder="example@gmail.com"
-                />
-              </Form.Item>
-              <Form.Item label="Phone Number">
-                <Input
-                  size="large"
-                  min={12}
-                  max={13}
-                  type="number"
-                  name="phoneNumber"
-                  placeholder="08xxxxxxxxxx"
-                  width={"100%"}
-                />
-              </Form.Item>
-              <Form.Item label="Password">
-                <Input.Password size="large" name="password" />
-              </Form.Item>
-              <Form.Item label="Confirm Password">
-                <Input.Password size="large" name="confirmPassword" />
-              </Form.Item>
-
-              <Button size="large" variant="solid" color="primary" block>
-                Sign Up
-              </Button>
-            </Form>
+            <FormRegister />
 
             <div className="content-link">
               <Text type="secondary" className="text">

@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Typography, Form, Input, Button } from "antd";
+import { Row, Col, Typography } from "antd";
 import ImageBg from "../../images/login.png";
+import FromLogin from "../../components/FromLogin";
 import "./styles.scss";
 
 const { Title, Text } = Typography;
@@ -18,21 +19,7 @@ const Login = () => {
             <Text className="desc" type="secondary">
               Log in into your account
             </Text>
-            <Form layout="vertical">
-              <Form.Item label="Email">
-                <Input
-                  size="large"
-                  name="email"
-                  placeholder="example@gmail.com"
-                />
-              </Form.Item>
-              <Form.Item label="Password">
-                <Input.Password size="large" name="password" />
-              </Form.Item>
-              <Button size="large" variant="solid" color="primary" block>
-                Sign In
-              </Button>
-            </Form>
+            <FromLogin />
             <div className="content-link">
               <Text type="secondary" className="text">
                 Don't have an account?
