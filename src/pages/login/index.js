@@ -20,12 +20,16 @@ const Login = () => {
             </Text>
             <Form layout="vertical">
               <Form.Item label="Email">
-                <Input name="email" placeholder="example@gmail.com" />
+                <Input
+                  size="large"
+                  name="email"
+                  placeholder="example@gmail.com"
+                />
               </Form.Item>
               <Form.Item label="Password">
-                <Input.Password name="password" />
+                <Input.Password size="large" name="password" />
               </Form.Item>
-              <Button variant="solid" color="primary" block>
+              <Button size="large" variant="solid" color="primary" block>
                 Sign In
               </Button>
             </Form>

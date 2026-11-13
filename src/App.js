@@ -20,7 +20,7 @@ import { ProfileContext } from "./context";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Login from "./pages/login";
-import Register from "./pages/auth/Register";
+import Register from "./pages/register";
 import Logout from "./pages/auth/Logout";
 import AddRecipe from "./pages/AddRecipe";
 import DetailRecipe from "./pages/DetailRecipe";

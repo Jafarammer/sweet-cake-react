@@ -1,0 +1,61 @@
+.register-page {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+
+  .col-right {
+    height: 100vh;
+  }
+
+  .col-left {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: inherit;
+  }
+
+  .title {
+    line-height: 2px;
+    text-align: center;
+  }
+
+  .desc {
+    text-align: center;
+  }
+
+  .box-card {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 8px;
+    width: 520px;
+  }
+
+  .content-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+
+    .text {
+      font-size: inherit;
+    }
+    .link {
+      // color: $primary;
+      font-size: inherit;
+      font-weight: 500;
+      text-decoration: none;
+
+      // &:hover {
+      //   color: $primary-hover;
+      // }
+    }
+  }
+}
