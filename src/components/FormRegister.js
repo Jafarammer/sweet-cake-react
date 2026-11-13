@@ -99,7 +99,14 @@ const FormRegister = ({ formik }) => {
         />
       </Form.Item>
 
-      <Button size="large" variant="solid" color="primary" block>
+      <Button
+        size="large"
+        variant="solid"
+        color="primary"
+        block
+        loading={formik.isSubmitting}
+        onClick={() => formik.submitForm()}
+      >
         Sign Up
       </Button>
     </Form>

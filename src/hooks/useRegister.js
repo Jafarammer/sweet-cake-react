@@ -1,7 +1,11 @@
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { registerSchema } from "../validations/authSchema";
+import { registerUser } from "../service/authService";
 
 const useRegister = () => {
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -12,7 +16,19 @@ const useRegister = () => {
     },
     validationSchema: registerSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      try {
+        const payload = {
+          name: values.name,
+          email: values.email,
+          phoneNumber: values.phoneNumber,
+          password: values.password,
+          confirmPassword: values.confirmPassword,
+        };
+        await registerUser(payload);
+        navigate("/login");
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 

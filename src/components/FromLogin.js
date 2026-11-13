@@ -44,6 +44,8 @@ const FromLogin = ({ formik }) => {
         variant="solid"
         color="primary"
         block
+        loading={formik.isSubmitting}
+        onClick={() => formik.submitForm()}
       >
         Sign In
       </Button>
