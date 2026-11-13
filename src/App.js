@@ -1,7 +1,13 @@
 // react router dom
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
+// layout
+import HideLayout from "./pages/HideLayout";
+import ShowLayout from "./pages/ShowLayout";
+// routes
+import GuestRoute from "./routes/GuestRoutes";
+import ProtectedRoutes from "./routes/ProtectedRoutes";
 // redux
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
@@ -12,10 +18,8 @@ import { ProfileContext } from "./context";
 // import "./App.css";
 // Pages
 import Home from "./pages/Home";
-import ShowLayout from "./pages/ShowLayout";
 import Profile from "./pages/Profile";
-import HideLayout from "./pages/HideLayout";
-import Login from "./pages/auth/Login";
+import Login from "./pages/login";
 import Register from "./pages/auth/Register";
 import Logout from "./pages/auth/Logout";
 import AddRecipe from "./pages/AddRecipe";
@@ -37,17 +41,29 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <Routes>
-            <Route element={<ShowLayout />}>
-              <Route path="/" element={<App />} />
-              <Route index element={<Home />} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route
+              element={
+                <GuestRoute>
+                  <HideLayout />
+                </GuestRoute>
+              }
+            >
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+            </Route>
+            <Route
+              element={
+                <ProtectedRoutes>
+                  <ShowLayout />
+                </ProtectedRoutes>
+              }
+            >
+              <Route path="/home" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/addRecipe" element={<AddRecipe />} />
               <Route path="/detail/:id" element={<DetailRecipe />} />
               <Route path="/searchPage/:keyword" element={<Search />} />
-            </Route>
-            <Route element={<HideLayout />}>
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
               <Route path="logout" element={<Logout />} />
             </Route>
           </Routes>
