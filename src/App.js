@@ -22,7 +22,7 @@ import Profile from "./pages/Profile";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Logout from "./pages/auth/Logout";
-import AddRecipe from "./pages/AddRecipe";
+import Recipe from "./pages/recipe";
 import DetailRecipe from "./pages/DetailRecipe";
 import Search from "./pages/Search";
 
@@ -61,7 +61,7 @@ function App() {
             >
               <Route path="/home" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/addRecipe" element={<AddRecipe />} />
+              <Route path="/addRecipe" element={<Recipe />} />
               <Route path="/detail/:id" element={<DetailRecipe />} />
               <Route path="/searchPage/:keyword" element={<Search />} />
               <Route path="logout" element={<Logout />} />

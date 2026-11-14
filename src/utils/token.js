@@ -11,7 +11,8 @@ export const setAccessToken = (accessToken) => {
   cookies.set(ACCESS_TOKEN_COOKIE_NAME, accessToken, {
     path: "/",
     sameSite: "lax",
-    maxAge: 15 * 60,
+    // maxAge: 15 * 60,
+    maxAge: 24 * 60 * 60,
   });
 };
 

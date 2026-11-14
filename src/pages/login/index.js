@@ -30,7 +30,7 @@ const Login = () => {
                 Don't have an account?
               </Text>{" "}
               <Link to="/register" className="link">
-                Sign up
+                Sign Up
               </Link>
             </div>
           </div>

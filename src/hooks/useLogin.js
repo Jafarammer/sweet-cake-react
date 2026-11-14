@@ -22,6 +22,7 @@ const useLogin = () => {
 
         const response = await loginUser(payload);
         setAccessToken(response.token);
+        localStorage.setItem("userId", JSON.stringify(response.user));
         navigate("/home");
       } catch (error) {
         console.log(error);

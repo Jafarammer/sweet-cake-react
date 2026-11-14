@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 // css
 import styles from "../../css/Navbar.module.css";
+import { getAccessToken } from "../../utils/token";
 
 function Navbar() {
-  const { token } = useSelector((state) => state?.auth);
+  const token = getAccessToken();
   const { profile } = useSelector((state) => state?.auth);
   return (
     <nav
@@ -26,7 +27,7 @@ function Navbar() {
       <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-5">
           <li className="nav-item mx-2 nav-link active fw-bold">
-            <Link to="/" className="text-decoration-none text-secondary">
+            <Link to="/home" className="text-decoration-none text-secondary">
               Home
             </Link>
           </li>
