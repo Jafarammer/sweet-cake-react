@@ -3,7 +3,7 @@ import { Form, Input, Button } from "antd";
 
 const FormRegister = ({ formik }) => {
   return (
-    <Form layout="vertical">
+    <Form layout="vertical" size="large">
       <Form.Item
         label="Name"
         required={false}
@@ -13,7 +13,6 @@ const FormRegister = ({ formik }) => {
         help={formik.touched.name ? formik.errors.name : undefined}
       >
         <Input
-          size="large"
           name="name"
           value={formik.values.name}
           onChange={formik.handleChange}
@@ -30,7 +29,6 @@ const FormRegister = ({ formik }) => {
       >
         <Input
           type="email"
-          size="large"
           name="email"
           placeholder="example@gmail.com"
           value={formik.values.email}
@@ -49,7 +47,6 @@ const FormRegister = ({ formik }) => {
         }
       >
         <Input
-          size="large"
           min={13}
           max={14}
           type="tel"
@@ -69,7 +66,6 @@ const FormRegister = ({ formik }) => {
         help={formik.touched.password ? formik.errors.password : undefined}
       >
         <Input.Password
-          size="large"
           name="password"
           value={formik.values.password}
           onChange={formik.handleChange}
@@ -91,7 +87,6 @@ const FormRegister = ({ formik }) => {
         }
       >
         <Input.Password
-          size="large"
           name="confirmPassword"
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
@@ -100,7 +95,6 @@ const FormRegister = ({ formik }) => {
       </Form.Item>
 
       <Button
-        size="large"
         variant="solid"
         color="primary"
         block

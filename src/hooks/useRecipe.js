@@ -11,6 +11,7 @@ const useRecipe = () => {
       title: "",
       ingredients: "",
       recipeCover: null,
+      recipeVideos: [null],
     },
     validationSchema: addRecipeSchema,
     onSubmit: async (values) => {
@@ -24,6 +25,12 @@ const useRecipe = () => {
         if (values.recipeCover) {
           formData.append("photo", values.recipeCover);
         }
+
+        values.recipeVideos.forEach((video) => {
+          if (video) {
+            formData.append("videos", video);
+          }
+        });
 
         formData.append("user_id", user.id);
 
