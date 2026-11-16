@@ -2,20 +2,30 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // axios
 import axiosInstance from "../helper/axios";
 import Swal from "sweetalert2";
+import { getDetailRecipeThunk } from "../store/thunk/recipeThunk";
 // organism
 import CardComment from "../components/oorganism/CardComment";
 // css
 import styles from "../css/DetailRecipe.module.css";
 // image
 import defaultImg from "../images/default.svg";
+import { getAccessToken } from "../utils/token";
+import useRecipe from "../hooks/useRecipe";
 
 function DetailRecipe() {
-  const { profile } = useSelector((state) => state?.auth);
-  const { token } = useSelector((state) => state?.auth);
+  const dispatch = useDispatch();
+  // const { detailRecipe, loading } = useSelector((state) => state.recipe);
+  const profile = JSON.parse(localStorage.getItem("userId"));
+  const token = getAccessToken();
+
+  const { detailRecipe } = useRecipe();
+
+  console.log("this", detailRecipe);
+
   const navigate = useNavigate();
   const params = useParams();
   const [dataRecipe, setDataRecipe] = useState([]);
@@ -23,10 +33,8 @@ function DetailRecipe() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    axiosInstance
-      .get(`/recipe/id/${params.id}`)
-      .then((res) => setDataRecipe(res.data.data));
-  }, []);
+    dispatch(getDetailRecipeThunk(params.id));
+  }, [dispatch, params.id]);
 
   const handleComment = async () => {
     setIsLoading(true);
@@ -47,7 +55,7 @@ function DetailRecipe() {
             user_id: profile?.id,
             recipe_id: params.id,
           },
-          []
+          [],
         )
         .then((res) => {
           Swal.fire({
@@ -146,7 +154,7 @@ function DetailRecipe() {
         </form>
         {/* result comment */}
         <h1 className="my-5">Comment</h1>
-        <CardComment />
+        {/* <CardComment /> */}
       </div>
     </div>
   );

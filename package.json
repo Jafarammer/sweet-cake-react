@@ -12,6 +12,7 @@
     "bootstrap-icons": "^1.9.1",
     "formik": "^2.4.9",
     "libphonenumber-js": "^1.13.16",
+    "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-cookie": "^8.1.2",

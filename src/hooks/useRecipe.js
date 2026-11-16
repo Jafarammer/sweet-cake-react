@@ -1,10 +1,17 @@
+import { useEffect } from "react";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { addRecipeSchema } from "../validations/recipeSchema";
 import { addRecipe } from "../service/recipeService";
+import { getDetailRecipeThunk } from "../store/thunk/recipeThunk";
 
 const useRecipe = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const dispatch = useDispatch();
+  const { detailRecipe, loading } = useSelector((state) => state.recipe);
 
   const formik = useFormik({
     initialValues: {
@@ -43,8 +50,13 @@ const useRecipe = () => {
     },
   });
 
+  useEffect(() => {
+    dispatch(getDetailRecipeThunk(id));
+  }, [dispatch, id]);
+
   return {
     formik,
+    detailRecipe,
   };
 };
 

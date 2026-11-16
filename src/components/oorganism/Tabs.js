@@ -19,7 +19,8 @@ import styles from "../../css/Profile.module.css";
 
 function Tabs() {
   const navigate = useNavigate();
-  const { profile } = useSelector((state) => state?.auth);
+  // const { profile } = useSelector((state) => state?.auth);
+  const profile = JSON.parse(localStorage.getItem("userId"));
   const userData = useContext(ProfileContext);
   const [toggleState, setToggleState] = useState(1);
   const [dataRecipe, setDataRecipe] = useState([]);

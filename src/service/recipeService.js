@@ -9,3 +9,14 @@ export const addRecipe = async (payload) => {
 
   return res.data;
 };
+
+export const getAllRecipe = async () => {
+  const res = await api.get("/recipe/all");
+  return res.data;
+};
+
+export const getDetailRecipe = async (id) => {
+  const res = await api.get(`/recipe/id/${id}`);
+
+  return res.data;
+};

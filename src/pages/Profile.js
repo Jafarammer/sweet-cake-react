@@ -13,7 +13,8 @@ import styles from "../css/Profile.module.css";
 import avatarImg from "../images/avatar.jpg";
 
 function Profile() {
-  const { profile } = useSelector((state) => state?.auth);
+  // const { profile } = useSelector((state) => state?.auth);
+  const profile = JSON.parse(localStorage.getItem("userId"));
   const [dataProfile, setDataProfile] = useState("");
   const navigate = useNavigate();
   const [photo, setPhoto] = useState(null);

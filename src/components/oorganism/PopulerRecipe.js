@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 // molecules
 import HeadSection from "../molecules/HeadSection";
 import Pagination from "../molecules/Pagination";
@@ -10,8 +11,14 @@ import styles from "../../css/Home.module.css";
 // image
 import populerImg from "../../images/default.svg";
 
+import { getAllRecipeThunk } from "../../store/thunk/recipeThunk";
+
 function PopulerRecipe() {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const { allRecipe, loading } = useSelector((state) => state.recipe);
+
   const [data, setData] = React.useState([]);
   const [sortType, setSortType] = React.useState("default");
   const pageSize = 6;
@@ -36,7 +43,8 @@ function PopulerRecipe() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+    dispatch(getAllRecipeThunk());
+  }, [dispatch]);
 
   const fetchData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/recipe/all`);
@@ -75,10 +83,10 @@ function PopulerRecipe() {
           </select>
         </div>
         <div className="row ms-5">
-          {paginatePosts.map((item) => (
+          {allRecipe?.map((item) => (
             <div
               className={`card ms-3 mb-3 bg-dark border-0 px-1 pb-1 ${styles.card_article3}`}
-              onClick={() => navigate(`/detail/${item?.id}`)}
+              onClick={() => navigate(`/detail/${item?.id_recipe}`)}
             >
               <img src={item?.photo || populerImg} className="card-img-top" />
               <p className="position-absolute fixed-bottom ms-4 text-light">
@@ -86,12 +94,6 @@ function PopulerRecipe() {
               </p>
             </div>
           ))}
-          <Pagination
-            items={data?.length}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-          />
         </div>
       </div>
     </div>

@@ -5,10 +5,8 @@ import { useSelector } from "react-redux";
 // css
 import styles from "../../css/Navbar.module.css";
 import { getAccessToken } from "../../utils/token";
-
 function Navbar() {
   const token = getAccessToken();
-  const { profile } = useSelector((state) => state?.auth);
   return (
     <nav
       className={`navbar navbar-expand-lg navbar-light bg-light sticky-top py-3 px-5 ${styles.d_nav}`}
@@ -70,7 +68,7 @@ function Navbar() {
           >
             <small className="me-3 fw-bold fs-6">
               {/* {props.auth.profile.name || null} */}
-              {profile?.name || "Username"}
+              "Username"
             </small>
           </button>
           <ul className="dropdown-menu dropdown-menu-lg-end">

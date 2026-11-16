@@ -1,8 +1,8 @@
 import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { getAccessToken } from "../utils/token";
 
 const GuestRoute = ({ children }) => {
-  const { token } = useSelector((state) => state?.auth);
+  const token = getAccessToken();
 
   if (token) return <Navigate to={"/home"} replace />;
 

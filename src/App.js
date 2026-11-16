@@ -10,7 +10,7 @@ import GuestRoute from "./routes/GuestRoutes";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 // redux
 import { Provider } from "react-redux";
-import { store, persistor } from "./redux/store";
+import { store, persistor } from "./store/configureStore";
 import { PersistGate } from "redux-persist/integration/react";
 // context
 import { ProfileContext } from "./context";
@@ -23,7 +23,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Logout from "./pages/auth/Logout";
 import Recipe from "./pages/recipe";
-import DetailRecipe from "./pages/DetailRecipe";
+import DetailRecipe from "./pages/detailRecipe/index";
 import Search from "./pages/Search";
 
 function App() {
