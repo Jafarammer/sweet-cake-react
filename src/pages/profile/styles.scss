@@ -1,0 +1,74 @@
+.profile-page {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 40px 80px;
+
+  .profile-card {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+  }
+
+  .content-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 24px;
+    gap: 16px;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #faad14;
+    width: 100%;
+    height: 280px;
+  }
+
+  .button {
+    width: 120px;
+  }
+
+  .tabs {
+    border-radius: 14px;
+  }
+
+  // styles compoenent
+  .my-recipe {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+
+    .recipe-card {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .recipe-card-cover {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .recipe-card-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .recipe-card .ant-card-body {
+      min-height: 120px;
+      padding: 20px;
+    }
+  }
+
+  .form-security {
+    margin: 24px 0px;
+  }
+
+  .form-personal-information {
+    margin: 24px 0px;
+  }
+}

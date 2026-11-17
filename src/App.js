@@ -18,7 +18,7 @@ import { ProfileContext } from "./context";
 // import "./App.css";
 // Pages
 import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+import Profile from "./pages/profile/index";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Logout from "./pages/auth/Logout";
