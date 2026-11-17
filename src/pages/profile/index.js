@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   Row,
@@ -21,6 +22,7 @@ import "./styles.scss";
 const { Title, Text } = Typography;
 
 const Profile = () => {
+  const navigate = useNavigate();
   // hooks
   const { myRecipe, formikSecurity, formikPersonalInformation } = useProfile();
   // useState
@@ -78,13 +80,18 @@ const Profile = () => {
               {
                 key: "1",
                 label: "My Recipe",
-                children: <MyReciped data={myRecipe} />,
+                children: (
+                  <MyReciped
+                    data={myRecipe}
+                    onAction={() => navigate("/addRecipe")}
+                  />
+                ),
                 icon: <FaUserAlt />,
               },
               {
                 key: "2",
                 label: "Saved Recipe",
-                children: <SavedRecipe />,
+                children: <SavedRecipe onAction={() => navigate("/home")} />,
                 icon: <FaBookmark />,
               },
             ]}

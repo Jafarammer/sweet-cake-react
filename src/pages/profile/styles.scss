@@ -32,12 +32,24 @@
     border-radius: 14px;
   }
 
+  .content-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 70vh;
+    width: 100%;
+  }
+
   // styles compoenent
   .my-recipe {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
     width: 100%;
+
+    .recipe-content {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
 
     .recipe-card {
       width: 100%;
