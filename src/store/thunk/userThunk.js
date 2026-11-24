@@ -31,7 +31,7 @@ export const updatePersonalInformationThunk = (payload) => async (dispatch) => {
   try {
     dispatch({ type: GET_PROFILE_REQUEST });
     const response = await updatePersonalInformation(payload);
-    dispatch({ type: GET_PROFILE_SUCCESS, payload: response.data.user });
+    dispatch({ type: GET_PROFILE_SUCCESS, payload: response.data });
 
     return response;
   } catch (error) {

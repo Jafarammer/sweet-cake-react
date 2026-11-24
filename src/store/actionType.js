@@ -20,3 +20,7 @@ export const GET_DETAIL_RECIPE_FAILED = "GET_DETAIL_RECIPE_FAILED";
 export const GET_MY_RECIPE_REQUEST = "GET_MY_RECIPE_REQUEST";
 export const GET_MY_RECIPE_SUCCESS = "GET_MY_RECIPE_SUCCESS";
 export const GET_MY_RECIPE_FAILED = "GET_MY_RECIPE_FAILED";
+
+// custome component message alert
+export const SHOW_MESSAGE = "SHOW_MESSAGE";
+export const HIDE_MESSAGE = "HIDE_MESSAGE";

@@ -7,6 +7,7 @@ import {
   personalInformationSchema,
   securitySchema,
 } from "../validations/profileSchema";
+import useMessage from "./useMessage";
 
 const useProfile = () => {
   const user = JSON.parse(localStorage.getItem("userId"));
@@ -15,6 +16,10 @@ const useProfile = () => {
   const { myRecipe, loading } = useSelector((state) => state.recipe);
   const { currentUser } = useSelector((state) => state.user);
   const [isUpdateProfile, setIsUpdateProfile] = useState(false);
+
+  console.log("this", currentUser);
+
+  const notify = useMessage();
 
   const formikPersonalInformation = useFormik({
     initialValues: {
@@ -32,8 +37,10 @@ const useProfile = () => {
         };
 
         await dispatch(updatePersonalInformationThunk(payload));
+
+        notify("Update personal information successfuly", "success");
       } catch (error) {
-        console.error(error);
+        notify("Update failed!", "error");
       } finally {
         setIsUpdateProfile(!isUpdateProfile);
       }

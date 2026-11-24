@@ -39,8 +39,6 @@ const Profile = () => {
     setIsUpdateProfile(!isUpdateProfile);
   };
 
-  console.log("this fddf", currentUser);
-
   const onConfirmUpdatePassword = () => {
     setIsUpdatePassword(!isUpdatePassword);
   };
@@ -54,7 +52,7 @@ const Profile = () => {
             <div className="content-info">
               <Avatar
                 size={72}
-                style={{ fontSize: 20, border: "2px solid black" }}
+                style={{ fontSize: 20 }}
                 src={currentUser?.photoProfile}
               >
                 {currentUser?.name

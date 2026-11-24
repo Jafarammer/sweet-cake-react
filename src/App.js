@@ -16,6 +16,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { ProfileContext } from "./context";
 // css global
 // import "./App.css";
+import GlobalMessage from "./components/common/GlobalMessage";
 // Pages
 import Home from "./pages/Home";
 import Profile from "./pages/profile/index";
@@ -30,6 +31,8 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <GlobalMessage />
+
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Navigate to="/login" replace />} />
