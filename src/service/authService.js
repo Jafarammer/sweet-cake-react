@@ -17,3 +17,9 @@ export const updatePersonalInformation = async (payload) => {
 
   return res.data;
 };
+
+export const getProfile = async () => {
+  const res = await api.get("/auth/profile");
+
+  return res.data;
+};

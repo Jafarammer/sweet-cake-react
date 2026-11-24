@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { getMyRecipeThunk } from "../store/thunk/recipeThunk";
-import { updatePersonalInformationThunk } from "../store/thunk/userThunk";
+import {
+  updatePersonalInformationThunk,
+  getProfileThunk,
+} from "../store/thunk/userThunk";
 import {
   personalInformationSchema,
   securitySchema,
@@ -16,8 +19,6 @@ const useProfile = () => {
   const { myRecipe, loading } = useSelector((state) => state.recipe);
   const { currentUser } = useSelector((state) => state.user);
   const [isUpdateProfile, setIsUpdateProfile] = useState(false);
-
-  console.log("this", currentUser);
 
   const notify = useMessage();
 
@@ -59,6 +60,7 @@ const useProfile = () => {
   });
 
   useEffect(() => {
+    dispatch(getProfileThunk());
     dispatch(getMyRecipeThunk(user?.id));
   }, [dispatch, user?.id]);
 
