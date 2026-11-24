@@ -18,7 +18,7 @@ const FormPersonalInformation = ({ onConfirm, showUpdate, formik }) => {
             value={formik.values.name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            readOnly={!showUpdate}
+            disabled={!showUpdate}
           />
         </Form.Item>
 
@@ -35,7 +35,7 @@ const FormPersonalInformation = ({ onConfirm, showUpdate, formik }) => {
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            readOnly={!showUpdate}
+            disabled={!showUpdate}
           />
         </Form.Item>
 
@@ -57,7 +57,7 @@ const FormPersonalInformation = ({ onConfirm, showUpdate, formik }) => {
             min={13}
             max={14}
             type="tel"
-            readOnly={!showUpdate}
+            disabled={!showUpdate}
           />
         </Form.Item>
 

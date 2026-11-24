@@ -3,6 +3,11 @@ export const SET_LOADING = "SET_LOADING";
 export const SET_ERROR = "SET_ERROR";
 export const LOGOUT = "LOGOUT";
 
+// user
+export const GET_PROFILE_REQUEST = "GET_PROFILE_REQUEST";
+export const GET_PROFILE_SUCCESS = "GET_PROFILE_SUCCESS";
+export const GET_PROFILE_FAILED = "GET_PROFILE_FAILED";
+
 // recipe
 export const GET_ALL_RECIPE_REQUEST = "GET_ALL_RECIPE_REQUEST";
 export const GET_ALL_RECIPE_SUCCESS = "GET_ALL_RECIPE_SUCCESS";

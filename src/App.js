@@ -27,15 +27,6 @@ import DetailRecipe from "./pages/detailRecipe/index";
 import Search from "./pages/Search";
 
 function App() {
-  // const ProfileContext = React.createContext({});
-  axios.interceptors.request.use((config) => {
-    if (localStorage.getItem("token")) {
-      config.headers = {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      };
-    }
-    return config;
-  });
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

@@ -24,14 +24,22 @@ const { Title, Text } = Typography;
 const Profile = () => {
   const navigate = useNavigate();
   // hooks
-  const { myRecipe, formikSecurity, formikPersonalInformation } = useProfile();
+  const {
+    myRecipe,
+    formikSecurity,
+    formikPersonalInformation,
+    currentUser,
+    isUpdateProfile,
+    setIsUpdateProfile,
+  } = useProfile();
   // useState
-  const [isUpdateProfile, setIsUpdateProfile] = useState(false);
   const [isUpdatePassword, setIsUpdatePassword] = useState(false);
   // function
   const onConfirmUpdateProfile = () => {
     setIsUpdateProfile(!isUpdateProfile);
   };
+
+  console.log("this fddf", currentUser);
 
   const onConfirmUpdatePassword = () => {
     setIsUpdatePassword(!isUpdatePassword);
@@ -40,16 +48,26 @@ const Profile = () => {
   return (
     <div className="profile-page">
       <Row gutter={24}>
+        {/* left */}
         <Col span={8}>
           <Card className="profile-card">
             <div className="content-info">
-              <Avatar size={72} style={{ fontSize: 20 }}>
-                W
+              <Avatar
+                size={72}
+                style={{ fontSize: 20, border: "2px solid black" }}
+                src={currentUser?.photoProfile}
+              >
+                {currentUser?.name
+                  ?.split(" ")
+                  .filter(Boolean)
+                  .slice(0, 2)
+                  .map((word) => word.charAt(0).toUpperCase())
+                  .join("")}
               </Avatar>
               <Button size="small" color="primary" variant="filled">
                 Edit
               </Button>
-              <Title level={4}>Wan Jafar</Title>
+              <Title level={4}>{currentUser?.name}</Title>
             </div>
 
             <Title level={4} type="secondary">
@@ -73,6 +91,7 @@ const Profile = () => {
             />
           </Card>
         </Col>
+        {/* right */}
         <Col span={16}>
           <Tabs
             defaultActiveKey="1"

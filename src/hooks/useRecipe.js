@@ -39,6 +39,17 @@ const useRecipe = () => {
           }
         });
 
+        // unutk update data
+        // if (values.photo instanceof File) {
+        //   formData.append("photo", values.photo);
+        // }
+
+        // values.videos.forEach((video) => {
+        //   if (video instanceof File) {
+        //     formData.append("videos", video);
+        //   }
+        // });
+
         formData.append("user_id", user.id);
 
         await addRecipe(formData);
