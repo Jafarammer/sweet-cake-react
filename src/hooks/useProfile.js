@@ -5,6 +5,7 @@ import { getMyRecipeThunk } from "../store/thunk/recipeThunk";
 import {
   updatePersonalInformationThunk,
   getProfileThunk,
+  updatePhotoProfileThunk,
 } from "../store/thunk/userThunk";
 import {
   personalInformationSchema,
@@ -18,9 +19,12 @@ const useProfile = () => {
   const dispatch = useDispatch();
   const { myRecipe, loading } = useSelector((state) => state.recipe);
   const { currentUser } = useSelector((state) => state.user);
-  const [isUpdateProfile, setIsUpdateProfile] = useState(false);
 
   const notify = useMessage();
+
+  const [isUpdateProfile, setIsUpdateProfile] = useState(false);
+  const [loadingFile, setLoadingFile] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const formikPersonalInformation = useFormik({
     initialValues: {
@@ -59,6 +63,50 @@ const useProfile = () => {
     },
   });
 
+  const onSelectFile = async (event) => {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      notify("Only JPG, PNG, and WEBP are allowed", "error");
+      event.target.value = "";
+      return;
+    }
+
+    if (file > 2 * 1024 * 1024) {
+      notify("Maximum photo size is 2 MB", "error");
+      event.target.value = "";
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("photo", file);
+
+    try {
+      setLoadingFile(true);
+      setProgress(0);
+
+      await dispatch(
+        updatePhotoProfileThunk(formData, (percent) => {
+          setProgress(percent);
+        }),
+      );
+
+      notify("Profile photo updated successfully", "success");
+    } catch (error) {
+      notify(
+        error.response?.data?.message || "Failed to update photo profile",
+        "error",
+      );
+    } finally {
+      setLoadingFile(false);
+      setProgress(0);
+      event.target.value = "";
+    }
+  };
+
   useEffect(() => {
     dispatch(getProfileThunk());
     dispatch(getMyRecipeThunk(user?.id));
@@ -71,6 +119,9 @@ const useProfile = () => {
     currentUser,
     isUpdateProfile,
     setIsUpdateProfile,
+    onSelectFile,
+    progress,
+    loadingFile,
   };
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
@@ -10,6 +10,7 @@ import {
   Button,
   Divider,
   Tabs,
+  Progress,
 } from "antd";
 import { FaUserAlt, FaBookmark } from "react-icons/fa";
 import MyReciped from "../../components/pages/profile/MyReciped";
@@ -31,7 +32,12 @@ const Profile = () => {
     currentUser,
     isUpdateProfile,
     setIsUpdateProfile,
+    onSelectFile,
+    progress,
+    loadingFile,
   } = useProfile();
+  // ref
+  const fileInputRef = useRef(null);
   // useState
   const [isUpdatePassword, setIsUpdatePassword] = useState(false);
   // function
@@ -50,19 +56,43 @@ const Profile = () => {
         <Col span={8}>
           <Card className="profile-card">
             <div className="content-info">
-              <Avatar
-                size={72}
-                style={{ fontSize: 20 }}
-                src={currentUser?.photoProfile}
+              {loadingFile && (
+                <Progress
+                  type="circle"
+                  percent={progress}
+                  format={(percent) => `${percent}%`}
+                  size={72}
+                />
+              )}
+
+              {!loadingFile && (
+                <Avatar
+                  size={72}
+                  style={{ fontSize: 20 }}
+                  src={currentUser?.photoProfile}
+                >
+                  {currentUser?.name
+                    ?.split(" ")
+                    .filter(Boolean)
+                    .slice(0, 2)
+                    .map((word) => word.charAt(0).toUpperCase())
+                    .join("")}
+                </Avatar>
+              )}
+
+              <input
+                hidden
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                ref={fileInputRef}
+                onChange={onSelectFile}
+              />
+              <Button
+                size="small"
+                color="primary"
+                variant="filled"
+                onClick={() => fileInputRef.current.click()}
               >
-                {currentUser?.name
-                  ?.split(" ")
-                  .filter(Boolean)
-                  .slice(0, 2)
-                  .map((word) => word.charAt(0).toUpperCase())
-                  .join("")}
-              </Avatar>
-              <Button size="small" color="primary" variant="filled">
                 Edit
               </Button>
               <Title level={4}>{currentUser?.name}</Title>

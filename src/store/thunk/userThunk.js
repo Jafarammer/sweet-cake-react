@@ -8,6 +8,7 @@ import {
   loginUser,
   updatePersonalInformation,
   getProfile,
+  updatePhotoProfile,
 } from "../../service/authService";
 
 export const loginThunk = (payload) => async (dispatch) => {
@@ -44,6 +45,24 @@ export const updatePersonalInformationThunk = (payload) => async (dispatch) => {
     throw error;
   }
 };
+
+export const updatePhotoProfileThunk =
+  (formData, progress) => async (dispatch) => {
+    try {
+      dispatch({ type: GET_PROFILE_REQUEST });
+      const response = await updatePhotoProfile(formData, progress);
+      dispatch({ type: GET_PROFILE_SUCCESS, payload: response.data });
+
+      return response;
+    } catch (error) {
+      dispatch({
+        type: GET_PROFILE_FAILED,
+        payload: error.response?.data?.message || error.message || "any error",
+      });
+
+      throw error;
+    }
+  };
 
 export const getProfileThunk = () => async (dispatch) => {
   try {

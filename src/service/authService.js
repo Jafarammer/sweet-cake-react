@@ -23,3 +23,16 @@ export const getProfile = async () => {
 
   return res.data;
 };
+
+export const updatePhotoProfile = async (formData, progress) => {
+  const res = await api.patch("/auth/profile/photo-profile", formData, {
+    onUploadProgress: (event) => {
+      if (event.total) {
+        const percent = Math.round((event.loaded * 100) / event.total);
+        progress(percent);
+      }
+    },
+  });
+
+  return res.data;
+};
