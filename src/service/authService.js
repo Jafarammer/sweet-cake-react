@@ -37,6 +37,12 @@ export const updatePhotoProfile = async (formData, progress) => {
   return res.data;
 };
 
+export const updateSecurity = async (payload) => {
+  const res = await api.patch("/auth/profile/change-password", payload);
+
+  return res.data;
+};
+
 export const logout = async () => {
   const res = await api.post("/auth/logout");
 

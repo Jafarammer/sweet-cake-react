@@ -13,6 +13,7 @@ import {
 } from "../validations/profileSchema";
 import useMessage from "./useMessage";
 import useLogout from "./useLogout";
+import { updateSecurity } from "../service/authService";
 
 const useProfile = () => {
   const user = JSON.parse(localStorage.getItem("userId"));
@@ -66,7 +67,25 @@ const useProfile = () => {
     },
     validationSchema: securitySchema,
     onSubmit: async (values) => {
-      console.log(values);
+      try {
+        const payload = {
+          currentPassword: values.currentPassword,
+          newPassword: values.newPassword,
+          confirmPassword: values.confirmPassword,
+        };
+
+        const result = await updateSecurity(payload);
+
+        notify("Change password successfully", "success");
+
+        if (result.reLogin) {
+          setTimeout(() => {
+            logout();
+          }, 3000);
+        }
+      } catch (error) {
+        notify("Change password failed", "error");
+      }
     },
   });
 
