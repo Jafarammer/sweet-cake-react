@@ -12,6 +12,7 @@ import {
   securitySchema,
 } from "../validations/profileSchema";
 import useMessage from "./useMessage";
+import useLogout from "./useLogout";
 
 const useProfile = () => {
   const user = JSON.parse(localStorage.getItem("userId"));
@@ -21,6 +22,7 @@ const useProfile = () => {
   const { currentUser } = useSelector((state) => state.user);
 
   const notify = useMessage();
+  const logout = useLogout();
 
   const [isUpdateProfile, setIsUpdateProfile] = useState(false);
   const [loadingFile, setLoadingFile] = useState(false);
@@ -41,9 +43,14 @@ const useProfile = () => {
           phoneNumber: values.phoneNumber,
         };
 
-        await dispatch(updatePersonalInformationThunk(payload));
-
+        const result = await dispatch(updatePersonalInformationThunk(payload));
         notify("Update personal information successfuly", "success");
+
+        if (result?.data?.reLogin) {
+          setTimeout(() => {
+            logout();
+          }, 3000);
+        }
       } catch (error) {
         notify("Update failed!", "error");
       } finally {

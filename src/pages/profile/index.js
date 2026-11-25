@@ -62,6 +62,7 @@ const Profile = () => {
                   percent={progress}
                   format={(percent) => `${percent}%`}
                   size={72}
+                  strokeColor={"#f5f5f5"}
                 />
               )}
 
