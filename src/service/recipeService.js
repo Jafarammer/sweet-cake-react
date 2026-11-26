@@ -12,7 +12,7 @@ export const getAllRecipe = async () => {
 };
 
 export const getDetailRecipe = async (id) => {
-  const res = await api.get(`/recipe/id/${id}`);
+  const res = await api.get(`/recipe/detail/${id}`);
   return res.data;
 };
 
