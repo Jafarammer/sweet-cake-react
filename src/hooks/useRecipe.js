@@ -1,10 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { addRecipeSchema } from "../validations/recipeSchema";
 import { addRecipe } from "../service/recipeService";
-import { getDetailRecipeThunk } from "../store/thunk/recipeThunk";
+import {
+  getDetailRecipeThunk,
+  getMyRecipeThunk,
+} from "../store/thunk/recipeThunk";
+import { deleteRecipe } from "../service/recipeService";
 import useMessage from "./useMessage";
 
 const useRecipe = () => {
@@ -12,9 +16,15 @@ const useRecipe = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const { detailRecipe, loading } = useSelector((state) => state.recipe);
+  const { detailRecipe, myRecipe } = useSelector((state) => state.recipe);
 
   const notify = useMessage();
+
+  const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [params, setParams] = useState({ page: 1, limit: 10 });
+  const [deletedData, setDeletedData] = useState({ id: 0, title: "" });
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -26,6 +36,8 @@ const useRecipe = () => {
     validationSchema: addRecipeSchema,
     onSubmit: async (values) => {
       try {
+        setLoading(true);
+        setProgress(0);
         const formData = new FormData();
         const user = JSON.parse(localStorage.getItem("userId"));
 
@@ -53,24 +65,62 @@ const useRecipe = () => {
         //   }
         // });
 
-        await addRecipe(formData);
+        await addRecipe(formData, (percent) => {
+          setProgress(percent);
+        });
 
         notify("Create recipe successfully", "success");
 
         navigate("/home");
       } catch (error) {
         notify("Failed to create recipe", "error");
+      } finally {
+        setLoading(false);
+        setProgress(0);
       }
     },
   });
 
+  const openConfirmDelete = (id, title) => {
+    setDeletedData({ id, title });
+    setConfirmDelete(true);
+  };
+
+  const closeConfirmDelete = () => {
+    setDeletedData({ id: 0, title: "" });
+    setConfirmDelete(false);
+  };
+
+  const onDeleteRecipe = async (id) => {
+    try {
+      setLoading(true);
+      await deleteRecipe(deletedData.id);
+      notify("Deleted recipe successfully", "success");
+      closeConfirmDelete();
+      dispatch(getMyRecipeThunk(params));
+    } catch (error) {
+      notify("Deleted recipe failed", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
+    dispatch(getMyRecipeThunk(params));
     dispatch(getDetailRecipeThunk(id));
-  }, [dispatch, id]);
+  }, [dispatch, params, id]);
 
   return {
     formik,
     detailRecipe,
+    progress,
+    loading,
+    myRecipe,
+    onDeleteRecipe,
+    confirmDelete,
+    openConfirmDelete,
+    closeConfirmDelete,
+    deletedData,
   };
 };
 

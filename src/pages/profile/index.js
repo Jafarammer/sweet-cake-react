@@ -18,6 +18,7 @@ import SavedRecipe from "../../components/pages/profile/SavedRecipe";
 import FormSecurity from "../../components/pages/profile/FormSecurity";
 import FormPersonalInformation from "../../components/pages/profile/FormPersonalInformation";
 import useProfile from "../../hooks/useProfile";
+import useRecipe from "../../hooks/useRecipe";
 import "./styles.scss";
 
 const { Title, Text } = Typography;
@@ -27,6 +28,15 @@ const Profile = () => {
   // hooks
   const {
     myRecipe,
+    onDeleteRecipe,
+    confirmDelete,
+    openConfirmDelete,
+    closeConfirmDelete,
+    deletedData,
+    loading,
+  } = useRecipe();
+
+  const {
     formikSecurity,
     formikPersonalInformation,
     currentUser,
@@ -47,6 +57,17 @@ const Profile = () => {
 
   const onConfirmUpdatePassword = () => {
     setIsUpdatePassword(!isUpdatePassword);
+  };
+
+  // config action my recipe
+  const myRecipeAction = {
+    delete: onDeleteRecipe,
+    open: confirmDelete,
+    openConfirm: openConfirmDelete,
+    closeConfirm: closeConfirmDelete,
+    data: deletedData,
+    loading: loading,
+    go: navigate,
   };
 
   return (
@@ -129,10 +150,7 @@ const Profile = () => {
                 key: "1",
                 label: "My Recipe",
                 children: (
-                  <MyReciped
-                    myRecipe={myRecipe}
-                    onAction={() => navigate("/addRecipe")}
-                  />
+                  <MyReciped myRecipe={myRecipe} onAction={myRecipeAction} />
                 ),
                 icon: <FaUserAlt />,
               },

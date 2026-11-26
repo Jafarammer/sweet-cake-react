@@ -10,6 +10,7 @@ import {
   Upload,
   Divider,
   Space,
+  Progress,
 } from "antd";
 import { FaTrash } from "react-icons/fa";
 import { MdOutlineFileUpload } from "react-icons/md";
@@ -23,7 +24,7 @@ const Recipe = () => {
   // router
   const navigate = useNavigate();
   // hooks
-  const { formik } = useRecipe();
+  const { formik, progress, loading } = useRecipe();
   // useState
   const [preview, setPreview] = useState(null);
   const [previewVideo, setPreviewVideo] = useState(null);
@@ -208,6 +209,12 @@ const Recipe = () => {
             </Form.Item>
           </Col>
         </Row>
+
+        {/* di hide dulu , perlu dapet data presentase dari clodinarynya */}
+        {/* {loading && (
+          <Progress percent={progress} format={(percent) => `${percent}%`} />
+        )} */}
+
         <Divider size="large" />
         <Flex justify="flex-end" align="center" gap={16}>
           <Button

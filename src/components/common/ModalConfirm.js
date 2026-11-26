@@ -1,15 +1,22 @@
 import React from "react";
 import { Modal, Button, Divider } from "antd";
 import { IoIosCloseCircle } from "react-icons/io";
-import "./styles/modal_delete.scss";
+import "./styles/modal_confirm.scss";
 
-const ModalDelete = ({ open, onCancel, onDelete, children }) => {
+const ModalConfirm = ({
+  open,
+  onCancel,
+  title = "Unknown",
+  onAction,
+  children,
+  loading = false,
+}) => {
   return (
     <Modal
       open={open}
       onCancel={onCancel}
-      className="modal-delete"
-      title="Comfirm Delete"
+      className="modal-confirm"
+      title={title}
       width={420}
       classNames={{
         header: "custom-modal-header",
@@ -18,13 +25,18 @@ const ModalDelete = ({ open, onCancel, onDelete, children }) => {
       closeIcon={<IoIosCloseCircle size={20} />}
       centered
       footer={
-        <div className="modal-delete-footer">
+        <div className="modal-confirm-footer">
           <Divider size="small" />
-          <div className="modal-delete-footer-content">
+          <div className="modal-confirm-footer-content">
             <Button variant="filled" color="default" onClick={onCancel}>
               Cancel
             </Button>
-            <Button variant="solid" color="danger" onClick={onDelete}>
+            <Button
+              variant="solid"
+              color="danger"
+              onClick={onAction}
+              loading={loading}
+            >
               Delete
             </Button>
           </div>
@@ -36,4 +48,4 @@ const ModalDelete = ({ open, onCancel, onDelete, children }) => {
   );
 };
 
-export default ModalDelete;
+export default ModalConfirm;

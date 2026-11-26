@@ -16,10 +16,7 @@ import useLogout from "./useLogout";
 import { updateSecurity } from "../service/authService";
 
 const useProfile = () => {
-  const user = JSON.parse(localStorage.getItem("userId"));
-
   const dispatch = useDispatch();
-  const { myRecipe, loading } = useSelector((state) => state.recipe);
   const { currentUser } = useSelector((state) => state.user);
 
   const notify = useMessage();
@@ -28,10 +25,6 @@ const useProfile = () => {
   const [isUpdateProfile, setIsUpdateProfile] = useState(false);
   const [loadingFile, setLoadingFile] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [params, setParams] = useState({
-    page: 1,
-    limit: 10,
-  });
 
   const formikPersonalInformation = useFormik({
     initialValues: {
@@ -139,11 +132,9 @@ const useProfile = () => {
 
   useEffect(() => {
     dispatch(getProfileThunk());
-    dispatch(getMyRecipeThunk(params));
-  }, [dispatch, params]);
+  }, [dispatch]);
 
   return {
-    myRecipe,
     formikPersonalInformation,
     formikSecurity,
     currentUser,

@@ -1,36 +1,22 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Card } from "antd";
 import { MdEditDocument } from "react-icons/md";
 import { BiDetail } from "react-icons/bi";
 import { FaTrash } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
 import EmptyState from "../../common/EmptyState";
-import ModalDelete from "../../common/ModalDelete";
+import ModalConfirm from "../../common/ModalConfirm";
 
 const { Meta } = Card;
 
 const MyReciped = ({ myRecipe, onAction }) => {
-  const navigate = useNavigate();
-
-  const [confirmDelete, setConfirmDelete] = useState(false);
-  const [title, setTitle] = useState("");
-
-  const openConfirmDelete = (value) => {
-    setTitle(value);
-    setConfirmDelete(true);
-  };
-
-  const closeConfirmDelete = () => {
-    setTitle("");
-    setConfirmDelete(false);
-  };
-
   return (
     <div className="my-recipe">
       {myRecipe?.data?.length === 0 && (
         <div className="content-empty">
-          <EmptyState buttonText={"Create New Recipe"} onAction={onAction} />
+          <EmptyState
+            buttonText={"Create New Recipe"}
+            onAction={() => onAction.go("/addRecipe")}
+          />
         </div>
       )}
       {myRecipe?.data?.length > 0 && (
@@ -52,11 +38,13 @@ const MyReciped = ({ myRecipe, onAction }) => {
                 <MdEditDocument key="edit" />,
                 <BiDetail
                   key="detail"
-                  onClick={() => navigate(`/detail/${item.id_recipe}`)}
+                  onClick={() => onAction.go(`/detail/${item.id_recipe}`)}
                 />,
                 <FaTrash
                   key="delete"
-                  onClick={() => openConfirmDelete(item.title_recipe)}
+                  onClick={() =>
+                    onAction.openConfirm(item.id_recipe, item.title_recipe)
+                  }
                 />,
               ]}
             >
@@ -70,10 +58,16 @@ const MyReciped = ({ myRecipe, onAction }) => {
       )}
 
       {/* modal confirm delete */}
-      <ModalDelete open={confirmDelete} onCancel={closeConfirmDelete}>
+      <ModalConfirm
+        title="Delete Confirmation"
+        open={onAction.open}
+        onCancel={() => onAction.closeConfirm()}
+        onAction={() => onAction.delete()}
+        loading={onAction.loading}
+      >
         Are you sure, you want to delete
-        <strong>{title} ?</strong>
-      </ModalDelete>
+        <strong>{onAction.data.title} ?</strong>
+      </ModalConfirm>
     </div>
   );
 };
