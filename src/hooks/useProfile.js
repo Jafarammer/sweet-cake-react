@@ -28,6 +28,10 @@ const useProfile = () => {
   const [isUpdateProfile, setIsUpdateProfile] = useState(false);
   const [loadingFile, setLoadingFile] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 10,
+  });
 
   const formikPersonalInformation = useFormik({
     initialValues: {
@@ -135,8 +139,8 @@ const useProfile = () => {
 
   useEffect(() => {
     dispatch(getProfileThunk());
-    dispatch(getMyRecipeThunk(user?.id));
-  }, [dispatch, user?.id]);
+    dispatch(getMyRecipeThunk(params));
+  }, [dispatch, params]);
 
   return {
     myRecipe,

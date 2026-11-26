@@ -46,13 +46,18 @@ export const getDetailRecipeThunk = (id) => {
   };
 };
 
-export const getMyRecipeThunk = (id) => {
+export const getMyRecipeThunk = (params) => {
   return async (dispatch) => {
     try {
       dispatch({ type: GET_MY_RECIPE_REQUEST });
-      const response = await getMyRecipe(id);
+      const response = await getMyRecipe(params);
 
-      dispatch({ type: GET_MY_RECIPE_SUCCESS, payload: response.recipe });
+      const result = {
+        data: response.data,
+        metaData: response.metaData,
+      };
+
+      dispatch({ type: GET_MY_RECIPE_SUCCESS, payload: result });
     } catch (error) {
       dispatch({
         type: GET_MY_RECIPE_FAILED,

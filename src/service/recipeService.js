@@ -20,7 +20,7 @@ export const getDetailRecipe = async (id) => {
   return res.data;
 };
 
-export const getMyRecipe = async (id) => {
-  const res = await api.get(`/recipe/recipebyuser/${id}`);
+export const getMyRecipe = async (params) => {
+  const res = await api.get(`/recipe/my-recipe`, { params: params });
   return res.data;
 };

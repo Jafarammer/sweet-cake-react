@@ -130,7 +130,7 @@ const Profile = () => {
                 label: "My Recipe",
                 children: (
                   <MyReciped
-                    data={myRecipe}
+                    myRecipe={myRecipe}
                     onAction={() => navigate("/addRecipe")}
                   />
                 ),

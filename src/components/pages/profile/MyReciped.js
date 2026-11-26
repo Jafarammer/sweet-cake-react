@@ -7,17 +7,17 @@ import EmptyState from "../../common/EmptyState";
 
 const { Meta } = Card;
 
-const MyReciped = ({ data, onAction }) => {
+const MyReciped = ({ myRecipe, onAction }) => {
   return (
     <div className="my-recipe">
-      {data?.length === 0 && (
+      {myRecipe?.data?.length === 0 && (
         <div className="content-empty">
           <EmptyState buttonText={"Create New Recipe"} onAction={onAction} />
         </div>
       )}
-      {data?.length > 0 && (
+      {myRecipe?.data?.length > 0 && (
         <div className="recipe-content">
-          {data.map((item, index) => (
+          {myRecipe.data.map((item, index) => (
             <Card
               key={item.index}
               className="recipe-card"
