@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { addRecipeSchema } from "../validations/recipeSchema";
 import { addRecipe } from "../service/recipeService";
 import { getDetailRecipeThunk } from "../store/thunk/recipeThunk";
+import useMessage from "./useMessage";
 
 const useRecipe = () => {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ const useRecipe = () => {
 
   const dispatch = useDispatch();
   const { detailRecipe, loading } = useSelector((state) => state.recipe);
+
+  const notify = useMessage();
 
   const formik = useFormik({
     initialValues: {
@@ -26,7 +29,7 @@ const useRecipe = () => {
         const formData = new FormData();
         const user = JSON.parse(localStorage.getItem("userId"));
 
-        formData.append("title_recipe", values.title);
+        formData.append("titleRecipe", values.title);
         formData.append("ingredients", values.ingredients);
 
         if (values.recipeCover) {
@@ -50,13 +53,13 @@ const useRecipe = () => {
         //   }
         // });
 
-        formData.append("user_id", user.id);
-
         await addRecipe(formData);
+
+        notify("Create recipe successfully", "success");
 
         navigate("/home");
       } catch (error) {
-        console.log(error);
+        notify("Failed to create recipe", "error");
       }
     },
   });
