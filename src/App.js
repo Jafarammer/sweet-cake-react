@@ -15,7 +15,7 @@ import { PersistGate } from "redux-persist/integration/react";
 // context
 import { ProfileContext } from "./context";
 // css global
-// import "./App.css";
+// import "./App.scss";
 import GlobalMessage from "./components/common/GlobalMessage";
 // Pages
 import Home from "./pages/Home";
