@@ -27,11 +27,12 @@ const useRecipe = () => {
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      title: "",
-      ingredients: "",
-      recipeCover: null,
-      recipeVideos: [null],
+      title: id ? detailRecipe.title_recipe : "",
+      ingredients: id ? detailRecipe.ingredients : "",
+      recipeCover: id ? detailRecipe.photo : null,
+      recipeVideos: id ? detailRecipe.videos : [null],
     },
     validationSchema: addRecipeSchema,
     onSubmit: async (values) => {
@@ -105,6 +106,15 @@ const useRecipe = () => {
     }
   };
 
+  const onDetailEdit = async (id) => {
+    try {
+      await dispatch(getDetailRecipeThunk(id));
+      navigate(`/updateRecipe/${id}`);
+    } catch (error) {
+      notify("Edit data failed", "error");
+    }
+  };
+
   useEffect(() => {
     dispatch(getMyRecipeThunk(params));
     dispatch(getDetailRecipeThunk(id));
@@ -121,6 +131,8 @@ const useRecipe = () => {
     openConfirmDelete,
     closeConfirmDelete,
     deletedData,
+    onDetailEdit,
+    id,
   };
 };
 

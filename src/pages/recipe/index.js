@@ -24,9 +24,10 @@ const Recipe = () => {
   // router
   const navigate = useNavigate();
   // hooks
-  const { formik, progress, loading } = useRecipe();
+  const { formik, progress, loading, id } = useRecipe();
+
   // useState
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(formik.values.recipeCover || null);
   const [previewVideo, setPreviewVideo] = useState(null);
   // function
   const onUpload = (file) => {
@@ -69,9 +70,18 @@ const Recipe = () => {
   };
 
   // useEffect
+
+  useEffect(() => {
+    if (!id) {
+      formik.resetForm();
+      setPreview(null);
+      setPreviewVideo(null);
+    }
+  }, [id]);
+
   useEffect(() => {
     return () => {
-      if (preview) {
+      if (preview?.startsWith("blob:")) {
         URL.revokeObjectURL(preview);
       }
     };
@@ -210,7 +220,7 @@ const Recipe = () => {
           </Col>
         </Row>
 
-        {/* di hide dulu , perlu dapet data presentase dari clodinarynya */}
+        {/* di hide dulu , perlu dapet data presentase dari */}
         {/* {loading && (
           <Progress percent={progress} format={(percent) => `${percent}%`} />
         )} */}

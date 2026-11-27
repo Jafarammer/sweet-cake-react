@@ -56,6 +56,7 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/addRecipe" element={<Recipe />} />
+              <Route path="/updateRecipe/:id" element={<Recipe />} />
               <Route path="/detail/:id" element={<DetailRecipe />} />
               <Route path="/searchPage/:keyword" element={<Search />} />
               <Route path="logout" element={<Logout />} />

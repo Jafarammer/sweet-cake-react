@@ -34,6 +34,7 @@ const Profile = () => {
     closeConfirmDelete,
     deletedData,
     loading,
+    onDetailEdit,
   } = useRecipe();
 
   const {
@@ -68,6 +69,7 @@ const Profile = () => {
     data: deletedData,
     loading: loading,
     go: navigate,
+    edit: onDetailEdit,
   };
 
   return (

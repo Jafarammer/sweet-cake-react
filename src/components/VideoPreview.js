@@ -9,12 +9,21 @@ const VideoPreview = ({ file }) => {
       return;
     }
 
-    const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
+    if (typeof file === "object" && file.video_url) {
+      setPreviewUrl(file.video_url);
+      return;
+    }
 
-    return () => {
-      URL.revokeObjectURL(url);
-    };
+    if (file instanceof Blob) {
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+
+      return () => {
+        URL.revokeObjectURL(url);
+      };
+    }
+
+    setPreviewUrl(null);
   }, [file]);
 
   if (!previewUrl) return null;

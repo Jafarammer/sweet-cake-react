@@ -35,7 +35,10 @@ const MyReciped = ({ myRecipe, onAction }) => {
                 </div>
               }
               actions={[
-                <MdEditDocument key="edit" />,
+                <MdEditDocument
+                  key="edit"
+                  onClick={() => onAction.edit(item.id_recipe)}
+                />,
                 <BiDetail
                   key="detail"
                   onClick={() => onAction.go(`/detail/${item.id_recipe}`)}
