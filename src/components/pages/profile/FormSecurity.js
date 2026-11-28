@@ -101,6 +101,7 @@ const FormSecurity = ({ onConfirm, showUpdate, formik }) => {
               className="button"
               loading={formik.isSubmitting}
               onClick={() => formik.submitForm()}
+              disabled={!formik.dirty || formik.isSubmitting}
             >
               Save
             </Button>

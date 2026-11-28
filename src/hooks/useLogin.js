@@ -5,11 +5,14 @@ import { loginSchema } from "../validations/authSchema";
 import { loginUser } from "../service/authService";
 import { setAccessToken } from "../utils/token";
 import { loginThunk } from "../store/thunk/userThunk";
+import useMessage from "./useMessage";
 
 const useLogin = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  const notify = useMessage();
 
   const formik = useFormik({
     initialValues: {
@@ -26,9 +29,11 @@ const useLogin = () => {
 
         await dispatch(loginThunk(payload));
 
+        notify("Login successfully", "success");
+
         navigate("/home");
       } catch (error) {
-        console.log(error);
+        notify("Login failed", "error");
       }
     },
   });

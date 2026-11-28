@@ -27,6 +27,7 @@ const useProfile = () => {
   const [progress, setProgress] = useState(0);
 
   const formikPersonalInformation = useFormik({
+    enableReinitialize: true,
     initialValues: {
       name: currentUser?.name ?? "",
       email: currentUser?.email ?? "",
@@ -57,6 +58,7 @@ const useProfile = () => {
     },
   });
   const formikSecurity = useFormik({
+    enableReinitialize: true,
     initialValues: {
       currentPassword: "",
       newPassword: "",

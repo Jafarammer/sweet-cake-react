@@ -238,8 +238,10 @@ const Recipe = () => {
           <Button
             variant="solid"
             color="primary"
+            htmlType="button"
             loading={formik.isSubmitting}
-            onClick={() => formik.submitForm()}
+            onClick={formik.submitForm}
+            disabled={!formik.dirty || formik.isSubmitting}
             className="button"
           >
             Save

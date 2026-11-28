@@ -13,6 +13,12 @@ export const addRecipe = async (payload, progress) => {
   return res.data;
 };
 
+export const updateRecipe = async (id, payload) => {
+  const res = await api.patch(`/recipe/update/${id}`, payload);
+
+  return res.data;
+};
+
 export const getAllRecipe = async () => {
   const res = await api.get("/recipe/all");
   return res.data;

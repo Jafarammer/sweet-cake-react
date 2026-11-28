@@ -88,6 +88,7 @@ const FormPersonalInformation = ({ onConfirm, showUpdate, formik }) => {
               variant="solid"
               loading={formik.isSubmitting}
               onClick={() => formik.submitForm()}
+              disabled={!formik.dirty || formik.isSubmitting}
             >
               Save
             </Button>

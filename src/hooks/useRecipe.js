@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { addRecipeSchema } from "../validations/recipeSchema";
-import { addRecipe } from "../service/recipeService";
+import { addRecipe, updateRecipe } from "../service/recipeService";
 import {
   getDetailRecipeThunk,
   getMyRecipeThunk,
@@ -40,41 +40,47 @@ const useRecipe = () => {
         setLoading(true);
         setProgress(0);
         const formData = new FormData();
-        const user = JSON.parse(localStorage.getItem("userId"));
 
         formData.append("titleRecipe", values.title);
         formData.append("ingredients", values.ingredients);
 
-        if (values.recipeCover) {
+        if (values.recipeCover instanceof File) {
           formData.append("photo", values.recipeCover);
         }
 
-        values.recipeVideos.forEach((video) => {
-          if (video) {
-            formData.append("videos", video);
-          }
+        const existingVideo = values.recipeVideos
+          .filter((video) => video && video.id)
+          .map((video) => ({ id: video.id }));
+
+        const newVideo = values.recipeVideos.filter(
+          (video) => video instanceof File,
+        );
+
+        formData.append("existingVideo", JSON.stringify(existingVideo));
+
+        newVideo.forEach((vidoe) => {
+          formData.append("videos", vidoe);
         });
 
-        // unutk update data
-        // if (values.photo instanceof File) {
-        //   formData.append("photo", values.photo);
-        // }
+        if (!id) {
+          await addRecipe(formData, (percent) => {
+            setProgress(percent);
+          });
+        } else {
+          await updateRecipe(id, formData);
+        }
 
-        // values.videos.forEach((video) => {
-        //   if (video instanceof File) {
-        //     formData.append("videos", video);
-        //   }
-        // });
-
-        await addRecipe(formData, (percent) => {
-          setProgress(percent);
-        });
-
-        notify("Create recipe successfully", "success");
+        notify(
+          !id ? "Create recipe successfully" : "Update recipe successfully",
+          "success",
+        );
 
         navigate("/home");
       } catch (error) {
-        notify("Failed to create recipe", "error");
+        notify(
+          !id ? "Failed to create recipe" : "Failed to update recipe",
+          "error",
+        );
       } finally {
         setLoading(false);
         setProgress(0);
