@@ -8,8 +8,12 @@ import {
   Row,
   Col,
   Divider,
+  List,
+  Avatar,
 } from "antd";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
+import { AiOutlineLike } from "react-icons/ai";
+import { GrLike } from "react-icons/gr";
 import useRecipe from "../../hooks/useRecipe";
 import "./styles.scss";
 
@@ -18,26 +22,41 @@ const { Title, Text, Paragraph } = Typography;
 
 const DetailRecipe = () => {
   const { detailRecipe } = useRecipe();
+  console.log("this", detailRecipe);
+
   return (
     <div className="detail-recipe-page">
       <Row gutter={24}>
         <Col span={12}>
           <Card className="recipe-detail-card" bordered={false}>
+            <List itemLayout="horizontal">
+              <List.Item>
+                <List.Item.Meta
+                  avatar={<Avatar src={detailRecipe.user.photo} />}
+                  title={detailRecipe.user.name}
+                  description="Dessert · Easy · 45 minutes"
+                />
+              </List.Item>
+            </List>
             <div className="recipe-detail-cover">
               <img src={detailRecipe?.photo} alt="image" />
             </div>
 
             <div className="recipe-detail-content">
               <Flex justify="space-between" align="center">
+                <Title level={4}>{detailRecipe?.title_recipe}</Title>
                 <div>
-                  <Title level={2}>{detailRecipe?.title_recipe}</Title>
-                  <Text type="secondary">Dessert · Easy · 45 minutes</Text>
+                  <Button
+                    size="large"
+                    type="text"
+                    icon={<GrLike size={20} />}
+                  />
+                  <Button
+                    size="large"
+                    type="text"
+                    icon={<FaRegBookmark size={20} />}
+                  />
                 </div>
-                <Button
-                  size="large"
-                  type="text"
-                  icon={<FaRegBookmark size={20} />}
-                />
               </Flex>
 
               <Divider size="large" />

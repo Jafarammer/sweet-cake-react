@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import AntdProvider from "./utils/AntdProvider";
 // import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -9,7 +10,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <AntdProvider>
+    <App />
+  </AntdProvider>,
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

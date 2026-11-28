@@ -5,6 +5,7 @@ import axios from "axios";
 // layout
 import HideLayout from "./pages/HideLayout";
 import ShowLayout from "./pages/ShowLayout";
+import MainLayout from "./layout/MainLayout";
 // routes
 import GuestRoute from "./routes/GuestRoutes";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
@@ -49,7 +50,7 @@ function App() {
             <Route
               element={
                 <ProtectedRoutes>
-                  <ShowLayout />
+                  <MainLayout />
                 </ProtectedRoutes>
               }
             >

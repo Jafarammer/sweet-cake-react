@@ -67,6 +67,8 @@ const MyReciped = ({ myRecipe, onAction }) => {
         onCancel={() => onAction.closeConfirm()}
         onAction={() => onAction.delete()}
         loading={onAction.loading}
+        textButtonAction="Delete"
+        colorButtonAction="danger"
       >
         Are you sure, you want to delete
         <strong>{onAction.data.title} ?</strong>

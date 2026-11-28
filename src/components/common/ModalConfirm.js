@@ -10,6 +10,8 @@ const ModalConfirm = ({
   onAction,
   children,
   loading = false,
+  textButtonAction = "Unknown",
+  colorButtonAction = "primary",
 }) => {
   return (
     <Modal
@@ -33,11 +35,11 @@ const ModalConfirm = ({
             </Button>
             <Button
               variant="solid"
-              color="danger"
+              color={colorButtonAction}
               onClick={onAction}
               loading={loading}
             >
-              Delete
+              {textButtonAction}
             </Button>
           </div>
         </div>

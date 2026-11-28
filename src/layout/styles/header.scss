@@ -1,0 +1,23 @@
+.header-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  padding: 0 32px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .user {
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 30px;
+    transition: background 0.2s;
+  }
+
+  .userName {
+    font-size: 14px;
+  }
+}
